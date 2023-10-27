@@ -19,7 +19,7 @@ function SignUpPage() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const url = "http://170.64.129.76/createUser";
+        const url = "/api/createUser";
 
         if (formData.password !== formData.passwordConfirmation) {
             alert("Password and password confirmation do not match.");

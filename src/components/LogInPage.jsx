@@ -18,7 +18,7 @@ function LogInPage() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const url = "http://170.64.129.76/login";
+        const url = "/api/login";
 
         const body = new URLSearchParams();
         body.append("username", formData.username);
