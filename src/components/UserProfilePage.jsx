@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./small_components/Navbar";
 
 function UserProfilePage() {
     const [userData, setUserData] = React.useState(null);
 
+    // Get and set userData
     fetch("/api/myProfile")
         .then((response) => {
             if (!response.ok) {
@@ -18,16 +20,17 @@ function UserProfilePage() {
             console.error("Fetch error:", error);
         });
 
-    if (userData) {
-        return (
-            <div>
-                <h1>User Profile</h1>
+    return (
+        <>
+            <Navbar />
+            <h1>User Profile</h1>
+            {userData!==null ? (
                 <pre>{JSON.stringify(userData, null, 2)}</pre>
-            </div>
-        );
-    } else {
-        return <p>Loading...</p>;
-    }
+            ) : (
+                <p>Loading...</p>
+            )}
+        </>
+    );
 }
 
 export default UserProfilePage;

@@ -1,4 +1,6 @@
 import React from "react";
+import HomePage from "./components/HomePage";
+import InBoxPage from "./components/InBoxPage";
 import LandingPage from "./components/LandingPage";
 import LogInPage from "./components/LogInPage";
 import SignUpPage from "./components/SignUpPage";
@@ -11,6 +13,8 @@ function App() {
         <>
             <Router>
                 <Routes>
+                    <Route exact path="/home" element={<HomePage />} />
+                    <Route exact path="/in-box" element={<InBoxPage />} />
                     <Route exact path="/" element={<LandingPage />} />
                     <Route exact path="/log-in" element={<LogInPage />} />
                     <Route exact path="/sign-up" element={<SignUpPage />} />

@@ -56,7 +56,11 @@ function StaffLogInPage() {
                         <label htmlFor="accountType">
                             Select account type:{" "}
                         </label>
-                        <select name="accountType" id="accountType">
+                        <select
+                            name="accountType"
+                            id="accountType"
+                            onChange={handleInputChange}
+                        >
                             <option value={formData.accountType}>
                                 Manager
                             </option>
