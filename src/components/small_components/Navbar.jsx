@@ -18,7 +18,7 @@ function Navbar({ userName, userAvatar }) {
                     <img
                         src={
                             userAvatar ||
-                            "./assets/img/default-avatar.jpg"
+                            "/assets/img/default-avatar.jpg"
                         }
                         alt="User Avatar"
                         style={{ width: 48}}
