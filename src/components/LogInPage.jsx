@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "../css/logInPage.css"
+
 function LogInPage() {
     const [formData, setFormData] = React.useState({
         username: "",
@@ -43,7 +45,7 @@ function LogInPage() {
     return (
         <>
             <Link to="/">
-                <button className="logo">LOGO</button>
+                <button className="back">Back to selection</button>
             </Link>
             <div className="form-container">
                 <div className="form-title-container">

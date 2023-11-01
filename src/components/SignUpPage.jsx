@@ -49,7 +49,7 @@ function SignUpPage() {
     return (
         <>
             <Link to="/">
-                <button className="logo">LOGO</button>
+                <button className="back">Back to selection</button>
             </Link>
             <div className="form-container">
                 <h1>Create account</h1>
