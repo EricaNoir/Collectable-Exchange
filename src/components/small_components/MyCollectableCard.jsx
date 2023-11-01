@@ -22,7 +22,7 @@
 function MyCollectableCard({ exchange, onEditClick }) {
     return (
         <div className="my-collectable-card">
-            <img src="./assets/img/default-avatar.jpg" alt="item image"></img>
+            <img src={`/api/images/${exchange.collectableImage}`} alt="item image"></img>
             <h3 className="my-collectable-card-name">{exchange.collectableName}</h3>
             <h3 className="my-collectable-card-set">{exchange.collectableSet}</h3>
             <p className="my-collectable-card-price">{exchange.price}</p>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function CreateCollectableFloating({ nameList, closeWindow }) {
+function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
     const [createdItem, setCreatedItem] = React.useState({
         collectableName: "",
         collectableSet: "",
@@ -11,7 +11,7 @@ function CreateCollectableFloating({ nameList, closeWindow }) {
         visibility: true,
     });
 
-    const handleImageUpload = (event) => {
+    const handleFileChange = (event) => {
         const file = event.target.files[0];
         setCreatedItem({
             ...createdItem,
@@ -31,29 +31,26 @@ function CreateCollectableFloating({ nameList, closeWindow }) {
         event.preventDefault();
         const url = "/api/collectableExchangeCreate";
 
-        const body = new URLSearchParams();
+        const body = new FormData();
         body.append("collectableName", createdItem.collectableName);
         body.append("collectableSet", createdItem.collectableSet);
         body.append("price", createdItem.price);
         body.append("sellingOrBuying", createdItem.sellingOrBuying);
         body.append("collectableImage", createdItem.collectableImage);
         body.append("priority", createdItem.priority);
-        body.append("visibility", createdItem.visibility);
 
-        // fetch(url, {
-        //     method: "POST",
-        //     body: body,
-        //     headers: {
-        //         "Content-Type": "application/x-www-form-urlencoded",
-        //     },
-        // })
-        //     .then((response) => response.text())
-        //     .then((data) => {
-        //         if (data === "Success.") {
-        //             alert("Registration successful, please log in.");
-        //             window.location.href = "/log-in";
-        //         } else alert(data);
-        //     });
+        fetch(url, {
+            method: "POST",
+            body: body,
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                if (data === "Success.") {
+                    alert("Collectable create sucess.");
+                    onCreateSuccess();
+                    closeWindow();
+                } else alert("Error: " + data);
+            });
     };
 
     return (
@@ -119,8 +116,8 @@ function CreateCollectableFloating({ nameList, closeWindow }) {
                             <option value="" disabled>
                                 Select a type
                             </option>
-                            <option>selling</option>
-                            <option>buying</option>
+                            <option>SELLING</option>
+                            <option>BUYING</option>
                         </select>
                     </div>
                     <div>
@@ -130,8 +127,8 @@ function CreateCollectableFloating({ nameList, closeWindow }) {
                         <select
                             name="priority"
                             onChange={handleInputChange}
-                            required
                             value={createdItem.priority}
+                            required
                         >
                             <option value="" disabled>
                                 Select a priority
@@ -148,16 +145,11 @@ function CreateCollectableFloating({ nameList, closeWindow }) {
                             name="collectableImage"
                             id="collectableImage"
                             accept="image/*"
-                            onChange={handleImageUpload}
+                            onChange={handleFileChange}
                             required
                         />
                     </div>
-                    <button
-                        type="submit"
-                        onClick={() => console.log(createdItem)}
-                    >
-                        Submit
-                    </button>
+                    <button type="submit">Submit</button>
                     <button onClick={closeWindow}>Close</button>
                 </form>
             </div>

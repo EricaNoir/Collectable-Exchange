@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 function HomePage() {
 
-    const {userName} = useParams();
+    const { userName } = useParams();
 
     const [currentSection, setCurrentSection] = React.useState("plaza");
     // switch to palaza
@@ -189,7 +189,13 @@ function HomePage() {
             .catch((error) => {
                 console.error("Fetch error:", error);
             });
-    }, [currentSection]);
+    }, [myList, currentSection]);
+
+    // called when create succeed
+    function handleCreateSuccess() {
+        // trigger load my list again
+        setMyList(null);
+    }
 
     // Get current collectable category as a Json
     const [collectableCategory, setCollectableCategory] = React.useState(null);
@@ -224,7 +230,7 @@ function HomePage() {
             )}
 
             {activeWindow.type === "create" && collectableCategory !== null && (
-                <CreateCollectableFloating nameList={collectableCategory} closeWindow={closeFloatingWindow} />
+                <CreateCollectableFloating nameList={collectableCategory} closeWindow={closeFloatingWindow} onCreateSuccess={handleCreateSuccess} />
             )}
 
             {activeWindow.type === "edit" && (
@@ -333,14 +339,16 @@ function HomePage() {
                             className="card-container"
                             id="exchange-card-container"
                         >
-                            {exchangeList !== null ? (exchangeList.map((exchange) => (
+                            {(exchangeList !== null && exchangeList.length > 0) ? (exchangeList.map((exchange) => (
                                 <ExchangeCard
                                     key={exchange.exchangeId}
                                     exchange={exchange}
                                     onUserInfoClick={handleUserInfoClick}
                                     onSendRequestClick={handleSendRequestClick}
                                 />
-                            ))) : (
+                            ))) : exchangeList !== null ? (
+                                <div className="empty-list">The list is empty.</div>
+                            ) : (
                                 <div>Loading...</div>
                             )}
                         </div>
@@ -359,13 +367,15 @@ function HomePage() {
                             >
                                 +
                             </button>
-                            {myList !== null ? (myList.map((exchange) => (
+                            {(myList !== null && myList.length > 0) ? (myList.map((exchange) => (
                                 <MyCollectableCard
                                     key={exchange.exchangeId}
                                     exchange={exchange}
                                     onEditClick={handleEditClick}
                                 />
-                            ))) : (
+                            ))) : myList !== null ? (
+                                <div className="empty-list">The list is empty.</div>
+                            ) : (
                                 <div>Loading...</div>
                             )}
                         </div>
