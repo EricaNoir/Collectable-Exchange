@@ -5,8 +5,12 @@ import MyCollectableCard from "./small_components/MyCollectableCard";
 import UserInfoFloating from "./floating_windows/UserInfoFloating";
 import EditCollectableFloating from "./floating_windows/EditCollectableFloating";
 import CreateCollectableFloating from "./floating_windows/CreateCollectableFloating";
+import { useParams } from 'react-router-dom';
 
-function HomePage({ }) {
+function HomePage() {
+
+    const {userName} = useParams();
+
     const [currentSection, setCurrentSection] = React.useState("plaza");
     // switch to palaza
     function handlePlazaClick() {
@@ -210,7 +214,7 @@ function HomePage({ }) {
     return (
         <>
 
-            <Navbar />
+            <Navbar userName={userName} />
             <h1>This is the HomePage</h1>
             {activeWindow.type === "userInfo" && (
                 <UserInfoFloating

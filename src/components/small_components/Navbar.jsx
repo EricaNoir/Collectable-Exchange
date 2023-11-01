@@ -5,16 +5,16 @@ import { Link } from "react-router-dom";
     Contains: LOGO, Inbox button, UserAvatar (Profile button)
  */
 
-function Navbar({ userAvatar }) {
+function Navbar({ userName, userAvatar }) {
     return (
         <nav>
-            <Link to="/home">
+            <Link to={`/home/${userName}`}>
                 <button className="logo">CEMS</button>
             </Link>
-            <Link to="/in-box">
+            <Link to={`/in-box/${userName}`}>
                 <button className="inbox-button">Inbox</button>
             </Link>
-            <Link to="/user-profile">
+            <Link to={`/user-profile/${userName}`}>
                     <img
                         src={
                             userAvatar ||

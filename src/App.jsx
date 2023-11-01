@@ -13,13 +13,13 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route exact path="/home" element={<HomePage />} />
-                    <Route exact path="/in-box" element={<InBoxPage />} />
+                    <Route exact path="/home/:userName" element={<HomePage />} />
+                    <Route exact path="/in-box/:userName" element={<InBoxPage />} />
                     <Route exact path="/" element={<LandingPage />} />
                     <Route exact path="/log-in" element={<LogInPage />} />
                     <Route exact path="/sign-up" element={<SignUpPage />} />
                     <Route exact path="/staff-log-in" element={<StaffLogInPage />} />
-                    <Route exact path="/user-profile" element={<UserProfilePage />} />
+                    <Route exact path="/user-profile/:userName" element={<UserProfilePage />} />
                 </Routes>
             </Router>
         </>

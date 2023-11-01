@@ -15,8 +15,8 @@ function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
     return (
         <div className="exchange-card">
             <img src="./assets/img/default-avatar.jpg" alt="item image"></img>
-            <h3 className="exchange-card-name">{exchange.collectableName}</h3>
             <h3 className="exchange-card-set">{exchange.collectableSet}</h3>
+            <h3 className="exchange-card-name">{exchange.collectableName}</h3>
             <p className="exchange-card-price">{exchange.price}</p>
             <p className="exchange-card-selling-or-buying">{exchange.sellingOrBuying}</p>
 

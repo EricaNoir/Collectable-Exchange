@@ -33,7 +33,7 @@ function LogInPage() {
         }).then((response) => {
             if (response.status === 200) {
                 console.log("success");
-                window.location.href = "/home";
+                window.location.href = `/home/${formData.username}`;
             } else {
                 console.log(":(");
             }

@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Navbar from "./small_components/Navbar";
 
 function UserProfilePage() {
+    const {userName} = useParams();
     const [userData, setUserData] = React.useState(null);
 
     // Get and set userData
@@ -24,7 +25,7 @@ function UserProfilePage() {
 
     return (
         <>
-            <Navbar />
+            <Navbar userName={userName} />
             <h1>User Profile</h1>
             {userData!==null ? (
                 <pre>{JSON.stringify(userData, null, 2)}</pre>
