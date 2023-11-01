@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "../../css/navbar.css";
 
 /**
     Navbar in each page
@@ -7,23 +8,22 @@ import { Link } from "react-router-dom";
 
 function Navbar({ userName, userAvatar }) {
     return (
-        <nav>
+        <nav className="main-nav">
             <Link to={`/home/${userName}`}>
                 <button className="logo">CEMS</button>
             </Link>
-            <Link to={`/in-box/${userName}`}>
-                <button className="inbox-button">Inbox</button>
-            </Link>
-            <Link to={`/user-profile/${userName}`}>
-                    <img
-                        src={
-                            userAvatar ||
-                            "/assets/img/default-avatar.jpg"
-                        }
+            <div className="nav-right">
+                <Link to={`/in-box/${userName}`}>
+                    <button className="inbox-button">Inbox</button>
+                </Link>
+                <Link to={`/user-profile/${userName}`}>
+                    <img className="user-avatar-in-nav"
+                        src={userAvatar || "/assets/img/default-avatar.jpg"}
                         alt="User Avatar"
-                        style={{ width: 48}}
+                        style={{ width: 48 }}
                     />
-            </Link>
+                </Link>
+            </div>
         </nav>
     );
 }

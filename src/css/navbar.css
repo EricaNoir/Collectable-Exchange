@@ -1,0 +1,53 @@
+/* navbar.css */
+
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    height: 60px; /* Or the height you prefer */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* Optional: adds a shadow for better visibility */
+    z-index: 1000; /* Ensures the navbar is above other content */
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    background-color: transparent;
+    border: none;
+}
+
+.logo:hover {
+    
+    color: azure;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.inbox-button {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 20px; /* Optional: adds some space between the button and the avatar */
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.inbox-button:hover {
+    background-color: #45a049; /* A darker green for hover effect */
+}
+
+.user-avatar-in-nav {
+    padding-right: 30px;
+}

@@ -44,7 +44,7 @@ function StaffLogInPage() {
     return (
         <>
             <Link to="/">
-                <button className="logo">LOGO</button>
+                <button className="back">Back to selection</button>
             </Link>
             <div className="form-container">
                 <div className="form-title-container">

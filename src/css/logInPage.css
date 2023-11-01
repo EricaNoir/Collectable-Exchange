@@ -1,0 +1,73 @@
+/* 放在你的 logInPage.css 文件中 */
+
+.back {
+    display: block;
+    margin: 20px auto;
+    height: 55px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    text-decoration: none; /* 去掉链接的下划线 */
+}
+
+.back:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
+.form-container {
+    width: 400px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.form-title-container h1,
+.form-title-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="email"]
+input[type="num"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Added padding doesn't affect width */
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+}
+
+input[type="submit"]:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid #4CAF50;
+}
+
