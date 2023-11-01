@@ -1,6 +1,6 @@
 import React from "react";
 
-function CreateCollectableFloating({ closeWindow }) {
+function CreateCollectableFloating({ nameList, closeWindow }) {
     const [createdItem, setCreatedItem] = React.useState({
         collectableName: "",
         collectableSet: "",
@@ -9,11 +9,6 @@ function CreateCollectableFloating({ closeWindow }) {
         collectableImage: null,
         priority: "",
         visibility: true,
-    });
-    const [nameList, setNameList] = React.useState({
-        bsd: ["chuuya", "dazai", "atsushi"],
-        pig: ["miumiu", "miaomiao", "moumou"],
-        erica: ["pipi", "qiuqiu", "chuchu"],
     });
 
     const handleImageUpload = (event) => {

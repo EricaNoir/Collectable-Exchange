@@ -11,7 +11,7 @@
     Response: String ("Success." or "Collectable already occupied." or "Error.")
 */
 
-function ExchangeCard({ exchange, onUserInfoClick }) {
+function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
     return (
         <div className="exchange-card">
             <img src="./assets/img/default-avatar.jpg" alt="item image"></img>
@@ -20,8 +20,8 @@ function ExchangeCard({ exchange, onUserInfoClick }) {
             <p className="exchange-card-price">{exchange.price}</p>
             <p className="exchange-card-selling-or-buying">{exchange.sellingOrBuying}</p>
 
-            <button className="exchange-card-user-info-btn" onClick={() => onUserInfoClick(exchange.ownerId)}>See User Info</button>
-            <button className="exchange-card-send-request-btn">Send Request</button>
+            <button className="exchange-card-user-info-btn" onClick={() => onUserInfoClick(exchange.ownerName)}>See User Info</button>
+            <button className="exchange-card-send-request-btn" onClick={() => onSendRequestClick(exchange.exchangeId)}>Send Request</button>
         </div>
     )
 }

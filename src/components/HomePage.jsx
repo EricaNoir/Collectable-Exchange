@@ -6,7 +6,7 @@ import UserInfoFloating from "./floating_windows/UserInfoFloating";
 import EditCollectableFloating from "./floating_windows/EditCollectableFloating";
 import CreateCollectableFloating from "./floating_windows/CreateCollectableFloating";
 
-function HomePage({}) {
+function HomePage({ }) {
     const [currentSection, setCurrentSection] = React.useState("plaza");
     // switch to palaza
     function handlePlazaClick() {
@@ -23,11 +23,29 @@ function HomePage({}) {
         targetObject: null,
     });
     // add user info floating window
-    function handleUserInfoClick(ownerId) {
+    function handleUserInfoClick(ownerName) {
         setActiveWindow({
             type: "userInfo",
-            targetObject: ownerId,
+            targetObject: ownerName,
         });
+    }
+    // send trade request
+    function handleSendRequestClick(exchangeId) {
+        fetch(`/api/trade?exchangeId=${exchangeId}`)
+            .then((response) => {
+                return response.text();
+            })
+            .then((data) => {
+                alert("Response as text: " + data);
+                // remove traded exchanges
+                if (data === "Success." || data === "Collectable already occupied.") {
+                    setExchangeList(exchangeList.filter((exchange) => exchange.exchangeId !== exchangeId));
+                }
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+
     }
     // add create floating window
     function handleCreateClick() {
@@ -51,74 +69,158 @@ function HomePage({}) {
         });
     }
 
+    // Page
+    const [page, setPage] = React.useState(1);
+    function nextPage() {
+        if (exchangeList.length === 10) {
+            setPage(page + 1);
+        }
+    }
+    function prePage() {
+        if (page > 1) {
+            setPage(page - 1);
+        }
+    }
+
     // Get exchangeList as an array of json
-    const [exchangeList, setExchangeList] = React.useState([
-        {
-            exchangeId: 1,
-            collectableName: "chuuya",
-            collectableSet: "bsd",
-            price: 50,
-            sellingOrBuying: "selling",
-            updateDate: "30/10/2023",
-            collectableImage: null,
-            ownerId: 1,
-        },
-    ]);
-    // fetch("/api/collectableExchangeList")
-    //     .then((response) => {
-    //         if (!response.ok) {
-    //             throw new Error("Network response was not ok");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then((data) => {
-    //         setExchangeList(data);
-    //     })
-    //     .catch((error) => {
-    //         console.error("Fetch error:", error);
-    //     });
+    const [exchangeList, setExchangeList] = React.useState(null);
+    const [searchTerm, setSearchTerm] = React.useState({
+        ownerName: '',
+        collectableSet: '',
+        collectableName: ''
+    });
+    const [ownerSearchName, setOwnerSearchName] = React.useState('');
+    const [collectableSearchSet, setCollectableSearchSet] = React.useState('');
+    const [collectableSearchName, setCollectableSearchName] = React.useState('');
+
+    // search input with name
+    function handleSearchNameInput(ownerName) {
+        setSearchTerm({ ownerName: ownerName, collectableSet: '', collectableName: '' });
+        setCollectableSearchSet('');
+        setCollectableSearchName('');
+    }
+    // search input with set and card
+    function handleSearchCardInput(collectableSet, collectableName) {
+        setSearchTerm({ ownerName: '', collectableSet: collectableSet, collectableName: collectableName });
+        setOwnerSearchName('');
+    }
+
+    function handleSearch(searchTerm, page) {
+        // search by owner
+        if (searchTerm.ownerName !== '') {
+            fetch(`/api/collectableExchangeList/searchName?ownerName=${searchTerm.ownerName}&page=${page}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then((exchangeListData) => {
+                    setExchangeList(exchangeListData);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                });
+        }
+        // search by card set and name
+        else if (searchTerm.collectableSet !== '') {
+            fetch(`/api/collectableExchangeList/searchCard?collectableSet=${searchTerm.collectableSet}&collectableName=${searchTerm.collectableName}&page=${page}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then((exchangeListData) => {
+                    setExchangeList(exchangeListData);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                });
+        }
+        // no search page:
+        else {
+            fetch(`/api/collectableExchangeList?page=${page}`)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.json();
+                })
+                .then((exchangeListData) => {
+                    setExchangeList(exchangeListData);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                });
+        }
+    }
+
+    // load different page
+    React.useEffect(() => {
+        handleSearch(searchTerm, page);
+    }, [page, currentSection]);
+    // load different search term
+    React.useEffect(() => {
+        // this will trigger load different page
+        setPage(1);
+        handleSearch(searchTerm, 1);
+    }, [searchTerm]);
 
     // Get myList as an array of json
-    const [myList, setMyList] = React.useState([
-        {
-            exchangeId: 2,
-            collectableName: "dazai",
-            collectableSet: "bsd",
-            price: 50,
-            sellingOrBuying: "selling",
-            updateDate: "30/10/2023",
-            priority: "high",
-            collectableImage: null,
-            visibility: true,
-        },
-    ]);
-    // fetch("/api/myCollectableExchange")
-    //     .then((response) => {
-    //         if (!response.ok) {
-    //             throw new Error("Network response was not ok");
-    //         }
-    //         return response.json();
-    //     })
-    //     .then((data) => {
-    //         setMyList(data);
-    //     })
-    //     .catch((error) => {
-    //         console.error("Fetch error:", error);
-    //     });
+    const [myList, setMyList] = React.useState(null);
+
+    // load my list page
+    React.useEffect(() => {
+        fetch("/api/myCollectableExchange")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((myListData) => {
+                setMyList(myListData);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+    }, [currentSection]);
+
+    // Get current collectable category as a Json
+    const [collectableCategory, setCollectableCategory] = React.useState(null);
+
+    // load collectable category
+    React.useEffect(() => {
+        fetch("/api/currentAuthorisedCollectable")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((collectableCategoryData) => {
+                setCollectableCategory(collectableCategoryData);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+    }, []);
 
     return (
         <>
+
             <Navbar />
             <h1>This is the HomePage</h1>
             {activeWindow.type === "userInfo" && (
                 <UserInfoFloating
                     closeWindow={closeFloatingWindow}
-                    userId={activeWindow.targetObject}
+                    userName={activeWindow.targetObject}
                 />
             )}
 
-            {activeWindow.type === "create" && (
-                <CreateCollectableFloating closeWindow={closeFloatingWindow} />
+            {activeWindow.type === "create" && collectableCategory !== null && (
+                <CreateCollectableFloating nameList={collectableCategory} closeWindow={closeFloatingWindow} />
             )}
 
             {activeWindow.type === "edit" && (
@@ -161,18 +263,87 @@ function HomePage({}) {
                 </nav>
                 {currentSection === "plaza" ? (
                     <>
-                        <div className="search-bar">Search</div>
+                        <div className="search-bar">
+                            <div className="search-name">
+                                <label>
+                                    Search by owner name:
+                                    <input
+                                        type="text"
+                                        placeholder="Owner Name"
+                                        value={ownerSearchName}
+                                        onChange={(e) => setOwnerSearchName(e.target.value)}
+                                    />
+                                </label>
+                                <button className="search-btn" onClick={() => handleSearchNameInput(ownerSearchName)}>Search</button>
+                            </div>
+                            {collectableCategory !== null ? (
+                                <div className="search-card">
+                                    <label htmlFor="collectableSet">Collectable Set:</label>
+                                    <select
+                                        name="collectableSet"
+                                        onChange={(e) => setCollectableSearchSet(e.target.value)}
+                                        value={collectableSearchSet}
+                                        required
+                                    >
+                                        <option value="">
+                                            Select a set
+                                        </option>
+                                        {Object.keys(collectableCategory).map((set) => (
+                                            <option key={set}>{set}</option>
+                                        ))}
+                                    </select>
+
+                                    <label htmlFor="collectableName">Collectable Name:</label>
+                                    {collectableSearchSet !== '' ? (
+                                        <select
+                                            name="collectableName"
+                                            onChange={(e) => setCollectableSearchName(e.target.value)}
+                                            value={collectableSearchName}
+                                        >
+                                            <option value="">
+                                                Select a name
+                                            </option>
+                                            {collectableCategory[collectableSearchSet].map(
+                                                (name) => (
+                                                    <option key={name}>{name}</option>
+                                                )
+                                            )}
+                                        </select>) : (
+                                        <select disabled>
+                                            <option value="Select a name">Select a name</option>
+                                        </select>
+                                    )}
+                                    <button className="search-btn" onClick={() => handleSearchCardInput(collectableSearchSet, collectableSearchName)}>Search</button>
+                                </div>) : (
+                                <div>
+                                    Loading...
+                                </div>
+                            )}
+                        </div>
+                        <div className="page-bar">
+                            <button className="change-page-btn" onClick={prePage}>Previous Page</button>
+                            Current Page: {page}
+                            <button className="change-page-btn" onClick={nextPage}>Next Page</button>
+                        </div>
                         <div
                             className="card-container"
                             id="exchange-card-container"
                         >
-                            {exchangeList.map((exchange) => (
+                            {exchangeList !== null ? (exchangeList.map((exchange) => (
                                 <ExchangeCard
                                     key={exchange.exchangeId}
                                     exchange={exchange}
                                     onUserInfoClick={handleUserInfoClick}
+                                    onSendRequestClick={handleSendRequestClick}
                                 />
-                            ))}
+                            ))) : (
+                                <div>Loading...</div>
+                            )}
+                        </div>
+                        <div className="page-bar">
+                            <button className="change-page-btn" onClick={prePage}>Previous Page</button>
+                            Current Page: {page}
+                            <button className="change-page-btn" onClick={nextPage}>Next Page</button>
                         </div>
                     </>
                 ) : currentSection === "list" ? (
@@ -184,13 +355,15 @@ function HomePage({}) {
                             >
                                 +
                             </button>
-                            {myList.map((exchange) => (
+                            {myList !== null ? (myList.map((exchange) => (
                                 <MyCollectableCard
                                     key={exchange.exchangeId}
                                     exchange={exchange}
                                     onEditClick={handleEditClick}
                                 />
-                            ))}
+                            ))) : (
+                                <div>Loading...</div>
+                            )}
                         </div>
                     </>
                 ) : null}
