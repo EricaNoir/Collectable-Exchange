@@ -4,7 +4,7 @@ import TradeRequestCard from "./small_components/TradeRequestCard";
 import { useParams } from 'react-router-dom';
 
 function InBoxPage({ }) {
-    const {userName} = useParams();
+    const { userName } = useParams();
     // Get my trade as an array of json
     const [myTrade, setMyTrade] = React.useState(null);
 
@@ -27,42 +27,42 @@ function InBoxPage({ }) {
 
     function handleConfirmClick(exchangeId) {
         fetch(`/api/myTrade/confirm?exchangeId=${exchangeId}`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.text();
-        })
-        .then((data) => {
-            alert("Response as text: " + data);
-            // remove traded exchanges
-            if (data === "Success.") {
-                setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
-            }
-        })
-        .catch((error) => {
-            console.error("Fetch error:", error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then((data) => {
+                alert("Response as text: " + data);
+                // remove traded exchanges
+                if (data === "Success.") {
+                    setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
+                }
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
     }
 
     function handleDeclineClick(exchangeId) {
         fetch(`/api/myTrade/decline?exchangeId=${exchangeId}`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-            return response.text();
-        })
-        .then((data) => {
-            alert("Response as text: " + data);
-            // remove traded exchanges
-            if (data === "Success.") {
-                setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
-            }
-        })
-        .catch((error) => {
-            console.error("Fetch error:", error);
-        });
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then((data) => {
+                alert("Response as text: " + data);
+                // remove traded exchanges
+                if (data === "Success.") {
+                    setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
+                }
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
     }
 
     return (
@@ -84,9 +84,13 @@ function InBoxPage({ }) {
                         />
                     ))}
                 </div>
-            ) : (
+            ) : myTrade !== null ? (
                 <div>
                     No ongoing trade.
+                </div>
+            ) : (
+                <div>
+                    Loading...
                 </div>
             )
             }
