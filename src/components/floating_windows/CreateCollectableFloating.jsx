@@ -60,7 +60,7 @@ function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
 
     return (
         <div className="floating-window">
-            <div className="form-container">
+            <div className="floating-form-container">
                 <h1>Create a collectable trade</h1>
                 <form onSubmit={handleSubmit}>
                     <div>

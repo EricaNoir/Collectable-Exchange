@@ -197,7 +197,6 @@
     justify-content: space-between;
 }
 
-
 .list-content {
     display: flex;
     flex-wrap: wrap;
@@ -205,20 +204,24 @@
     height: calc(100vh - 230px);
     padding-top: 30px;
     justify-content: flex-start;
+    overflow-y: scroll;
 }
 
 .my-collectable-card {
     width: 220px;
-    height: 300px;
+    height: 290px;
     background-color: var(--bg-color, #206620);
     border-radius: 24px;
     padding: 20px;
-    margin: 36px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .add-my-item-btn {
     width: 260px;
-    height: 340px;
+    height: 330px;
     background-color: transparent;
     border-radius: 24px;
     padding: 20px;
@@ -229,7 +232,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    margin: 36px;
+    margin: 30px;
 }
 
 .add-my-item-btn:hover {
@@ -246,10 +249,17 @@
     height: 100%;
 }
 
+.my-collectable-card-1 {
+    height: 170px;
+}
+
 .my-collectable-card-1 h3 {
     color: white;
+    margin-top: 10px;
 }
+
 .my-collectable-card-2 p {
+    margin: 0px;
     color: white;
 }
 .my-collectable-card-3 {
