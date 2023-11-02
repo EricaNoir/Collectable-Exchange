@@ -17,11 +17,7 @@ function Navbar({ userName, userAvatar }) {
                     <button className="inbox-button">Inbox</button>
                 </Link>
                 <Link to={`/user-profile/${userName}`}>
-                    <img className="user-avatar-in-nav"
-                        src={userAvatar || "/assets/img/default-avatar.jpg"}
-                        alt="User Avatar"
-                        style={{ width: 48 }}
-                    />
+                <button className="inbox-button">My Profile</button>
                 </Link>
             </div>
         </nav>

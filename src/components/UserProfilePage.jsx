@@ -79,7 +79,7 @@ function UserProfilePage() {
                         <div className="user-info-container">
                             <div className="user-profile-2">
                                 <h1>User Profile</h1>
-                                <img src={user.userImage} alt="User Avatar" />
+                                <img src={`/api/images/${user.userImage}`} alt="User Avatar" />
                             </div>
                             <div className="user-profile-1">
                                 <h2>Welcome, {user.username}</h2>
