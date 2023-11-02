@@ -75,9 +75,11 @@ button:focus-visible {
     background: white;
     border: 1px solid #ccc;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+    padding: 40px;
     max-width: 80%;
 }
+
+
 
 #root {
     width: 100%;

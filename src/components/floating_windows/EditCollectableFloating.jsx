@@ -1,3 +1,5 @@
+import React from "react";
+
 function EditCollectableFloating({ exchange, closeWindow }) {
     const [editedItem, setEditedItem] = React.useState({
         exchangeId: exchange.exchangeId,
@@ -7,7 +9,7 @@ function EditCollectableFloating({ exchange, closeWindow }) {
         visibility: exchange.visibility,
         collectableImage: null,
     });
-    const [changed, setChanged] = useState(false);
+    const [changed, setChanged] = React.useState(false);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -53,7 +55,7 @@ function EditCollectableFloating({ exchange, closeWindow }) {
     };
     return (
         <div className="floating-window">
-            <div className="form-container">
+            <div className="floating-form-container">
                 <h1>Edit a collectable trade</h1>
                 <form onSubmit={handleSubmit}>
                     <div>
