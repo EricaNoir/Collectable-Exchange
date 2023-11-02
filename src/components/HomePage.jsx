@@ -49,7 +49,6 @@ function HomePage() {
             .catch((error) => {
                 console.error("Fetch error:", error);
             });
-
     }
     // add create floating window
     function handleCreateClick() {
@@ -59,11 +58,34 @@ function HomePage() {
         });
     }
     // add edit floating window
-    function handleEditClick(exchangeId) {
+    function handleEditClick(exchange) {
         setActiveWindow({
             type: "edit",
-            targetObject: exchangeId,
+            targetObject: exchange,
         });
+    }
+    // toggle my exchange
+    function handleToggleClick(exchange) {
+        const url = "/api/myCollectableExchange/edit";
+
+        const body = new FormData();
+        body.append("exchangeId", exchange.exchangeId);
+        body.append("price", exchange.price);
+        body.append("sellingOrBuying", exchange.sellingOrBuying);
+        body.append("priority", exchange.priority);
+        body.append("visibility", !exchange.visibility);
+        body.append("collectableImage", null);
+
+        fetch(url, {
+            method: "POST",
+            body: body,
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                if (data === "Edit success.") {
+                    alert("Collectable toggle sucess.");
+                } else alert("Error: " + data);
+            });
     }
     // close floating window
     function closeFloatingWindow() {
@@ -236,7 +258,7 @@ function HomePage() {
             {activeWindow.type === "edit" && (
                 <EditCollectableFloating
                     closeWindow={closeFloatingWindow}
-                    exchangeId={activeWindow.targetObject}
+                    exchange={activeWindow.targetObject}
                 />
             )}
 
@@ -372,6 +394,7 @@ function HomePage() {
                                     key={exchange.exchangeId}
                                     exchange={exchange}
                                     onEditClick={handleEditClick}
+                                    onToggleClick={handleToggleClick}
                                 />
                             ))) : myList !== null ? (
                                 <div className="empty-list">The list is empty.</div>

@@ -19,7 +19,7 @@
     Body: exchangeId, collectableName, collectableSet, price, sellingOrBuying, collectableImage, priority, visibility
 */
 
-function MyCollectableCard({ exchange, onEditClick }) {
+function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
     return (
         <div className="my-collectable-card">
             <img src={`/api/images/${exchange.collectableImage}`} alt="item image"></img>
@@ -32,11 +32,14 @@ function MyCollectableCard({ exchange, onEditClick }) {
 
             <button
                 className="my-collectable-card-edit-btn"
-                onClick={() => onEditClick(exchange.exchangeId)}
+                onClick={() => onEditClick(exchange)}
             >
                 Edit
             </button>
-            <button className="my-collectable-card-toggle-btn">
+            <button 
+                className="my-collectable-card-toggle-btn"
+                onClick={() => onToggleClick(exchange)}
+            >
                 Toggle
             </button>
         </div>
