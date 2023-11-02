@@ -152,19 +152,19 @@
     margin-bottom: 40px;
 }
 
-/* 如果是第一个元素，使用这种颜色 */
+
 .exchange-card:nth-child(3n + 1) {
-    --bg-color: #811c1c; /* 红色 */
+    --bg-color: #811c1c; 
 }
 
-/* 如果是第二个元素，使用这种颜色 */
+
 .exchange-card:nth-child(3n + 2) {
-    --bg-color: #206620; /* 绿色 */
+    --bg-color: #206620; 
 }
 
-/* 如果是第三个元素，使用这种颜色 */
+
 .exchange-card:nth-child(3n + 3) {
-    --bg-color: #2c2c85; /* 蓝色 */
+    --bg-color: #2c2c85;
 }
 
 .card-image-container {
@@ -183,6 +183,7 @@
 .exchange-card-1 h3 {
     width: 250px;
     text-align: right;
+    margin-top: 4px;
     color: white;
 }
 
