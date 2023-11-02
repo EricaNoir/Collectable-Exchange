@@ -24,8 +24,8 @@
 }
 
 .trade-request-card h2,
-h3,
-p {
+.trade-request-card h3,
+.trade-request-card p {
     color: white;
     margin: 0px;
 }
@@ -43,7 +43,7 @@ p {
 }
 
 .outgoing-request-card-1 h2 {
-    width: 200px
+    width: 200px;
 }
 
 .outgoing-request-card-2 {

@@ -3,15 +3,15 @@ import React from "react";
 function EditUserInfoFloating({ user, closeWindow }) {
     const [editedUser, setEditedUser] = React.useState({
         userEmail: user.userEmail,
-        userPhone: user.userPhone,
-        userFacebook: user.userFacebook,
-        buyingCollectableInterestedSet: !user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[0] : null,
-        buyingCollectableInterestedName: !user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[1] : null,
-        sellingCollectableInterestedSet: !user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[0] : null,
-        sellingCollectableInterestedName: !user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[1] : null,
+        userPhone: user.userPhone || "",
+        userFacebook: user.userFacebook || "",
+        buyingCollectableInterestedSet: user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[0] : "",
+        buyingCollectableInterestedName: user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[1] : "",
+        sellingCollectableInterestedSet: user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[0] : "",
+        sellingCollectableInterestedName: user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[1] : "",
         userImage: null,
     });
-    const [changed, setChanged] = useState(false);
+    const [changed, setChanged] = React.useState(false);
     // Get current collectable category as a Json
     const [collectableCategory, setCollectableCategory] = React.useState(null);
 
@@ -90,7 +90,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
 
             <div className="floating-window">
                 {collectableCategory !== null ? (
-                    <div className="form-container">
+                    <div className="floating-form-container">
                         <h1>Edit your profile</h1>
                         <form onSubmit={handleSubmit}>
                             <div>
@@ -130,7 +130,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                     onChange={handleInputChange}
                                     value={editedUser.buyingCollectableInterestedSet}
                                 >
-                                    <option value={null} disabled>
+                                    <option value="" disabled>
                                         Select a set
                                     </option>
                                     {Object.keys(collectableCategory).map((set) => (
@@ -147,7 +147,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                         value={editedUser.buyingCollectableInterestedName}
                                         required
                                     >
-                                        <option value={null} disabled>
+                                        <option value="" disabled>
                                             Select an item
                                         </option>
                                         {collectableCategory[editedUser.buyingCollectableInterestedSet].map(
@@ -165,7 +165,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                     onChange={handleInputChange}
                                     value={editedUser.sellingCollectableInterestedSet}
                                 >
-                                    <option value={null} disabled>
+                                    <option value="" disabled>
                                         Select a set
                                     </option>
                                     {Object.keys(collectableCategory).map((set) => (
@@ -182,7 +182,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                         value={editedUser.sellingCollectableInterestedName}
                                         required
                                     >
-                                        <option value={null} disabled>
+                                        <option value="" disabled>
                                             Select an item
                                         </option>
                                         {collectableCategory[editedUser.sellingCollectableInterestedSet].map(
