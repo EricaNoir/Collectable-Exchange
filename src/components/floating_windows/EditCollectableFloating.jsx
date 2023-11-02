@@ -1,3 +1,5 @@
+import React from "react";
+
 function EditCollectableFloating({ exchange, closeWindow }) {
     const [editedItem, setEditedItem] = React.useState({
         exchangeId: exchange.exchangeId,

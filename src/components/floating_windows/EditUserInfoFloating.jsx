@@ -1,3 +1,5 @@
+import React from "react";
+
 function EditUserInfoFloating({ user, closeWindow }) {
     const [editedUser, setEditedUser] = React.useState({
         userEmail: user.userEmail,
