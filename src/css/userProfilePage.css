@@ -1,0 +1,118 @@
+
+
+/* UserProfilePage */
+.user-profile-1 {
+    border-bottom: 1px solid #eaeaea;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-profile-2 {
+    height: 100px;
+}
+
+.user-profile-2 img {
+    height: 100%;
+}
+
+.user-profile-3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.user-profile-3 p {
+
+    width: 500px;
+}
+
+.user-profile-2 {
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+.profile-edit-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    height: 40px;
+}
+
+.profile-edit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* EditUserInfoFloating */
+.floating-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.floating-form-container h1 {
+    margin-top: 0;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.floating-form-container form {
+    display: grid;
+    gap: 20px;
+}
+
+.floating-form-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.floating-form-container input,
+.floating-form-container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.floating-form-container button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.floating-form-container button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.floating-form-container button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.floating-form-container button:not([type="submit"]) {
+    background-color: #eaeaea;
+}
+
+.floating-form-container button:not([type="submit"]):hover {
+    background-color: #ccc;
+}
