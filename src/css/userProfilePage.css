@@ -1,5 +1,3 @@
-
-
 /* UserProfilePage */
 .user-profile-1 {
     border-bottom: 1px solid #eaeaea;
@@ -20,11 +18,9 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
 }
 
 .user-profile-3 p {
-
     width: 500px;
 }
 
@@ -35,8 +31,6 @@
     display: flex;
     justify-content: space-between;
 }
-
-
 
 .profile-edit-btn {
     background-color: #007bff;
@@ -115,4 +109,57 @@
 
 .floating-form-container button:not([type="submit"]):hover {
     background-color: #ccc;
+}
+
+.user-trade-history-text {
+    margin-top: 0;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.user-trade-history-card-container {
+    overflow-y: scroll;
+    height: calc(100vh - 600px);
+}
+
+.trade-history-card {
+    display: flex;
+    height: 112px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 24px;
+    padding: 16px 24px;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.trade-history-card p {
+    margin: 6px;
+    margin-bottom: 0px;
+}
+
+.trade-history-image-div {
+    margin: 5px;
+    height: 72px;
+}
+.trade-history-image-div img {
+    height: 100%;
+    border-radius: 8px;
+}
+
+.trade-history-card-1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}.trade-history-card-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+}.trade-history-card-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
 }

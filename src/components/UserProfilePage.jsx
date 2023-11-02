@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "./small_components/Navbar";
 import EditUserInfoFloating from "./floating_windows/EditUserInfoFloating";
 import "../css/userProfilePage.css";
+import TradeHistoryCard from "./small_components/TradeHistoryCard"
 
 function UserProfilePage() {
     const { userName } = useParams();
@@ -72,34 +73,6 @@ function UserProfilePage() {
                 />
             )}
 
-            <h1>User Profile</h1>
-            {user !== null ? (
-                <>
-                    <h2>User Info</h2>
-                    <img src={user.userImage} alt="User Avatar" />
-                    <p>Username: {user.username}</p>
-                    <p>Email: {user.userEmail}</p>
-                    <p>Phone: {user.userPhone || "Not provided"}</p>
-                    <p>Facebook: {user.userFacebook || "Not provided"}</p>
-                    <p>
-                        Buying Collectable Interested: {user.buyingCollectableInterested || "Not provided"}
-                    </p>
-                    <p>
-                        Selling Collectable Interested: {user.sellingCollectableInterested || "Not provided"}
-                    </p>
-                    <button className="profile-edit-btn" onClick={() => handleEditClick(user)}></button>
-                </>
-            ) : (
-                <p>Loading...</p>
-            )}
-
-            {(tradeList !== null && tradeList.length > 0) ? (
-
-            ) : tradeList !== null ? (
-                <div>No trade history.</div>
-            ) : (
-                <div>Loading...</div>
-            )}
             <section className="body-container">
                 {user !== null ? (
                     <>
@@ -152,13 +125,26 @@ function UserProfilePage() {
                                 </p>
                             </div>
                         </div>
-                        <div className="user-trade-history-card-container"></div>
                     </>
                 ) : (
                     <p>Loading...</p>
                 )}
-
-                
+                {tradeList && tradeList.length > 0 ? (
+                    <>
+                        <h2 className="user-trade-history-text">
+                            My trade history
+                        </h2>
+                        <div className="user-trade-history-card-container">
+                            {tradeList.map((trade) => (
+                                <TradeHistoryCard trade={trade} />
+                            ))}
+                        </div>
+                    </>
+                ) : tradeList ? (
+                    <div>No trade history.</div>
+                ) : (
+                    <div>Loading...</div>
+                )}
             </section>
         </>
     );
