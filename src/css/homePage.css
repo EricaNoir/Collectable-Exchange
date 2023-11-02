@@ -146,26 +146,13 @@
 .exchange-card {
     width: 420px;
     height: 180px;
-    background-color: var(--bg-color, #206620);
+    background-color: var(--bg-color, #2c2c85);
     border-radius: 24px;
     padding: 20px;
     margin-bottom: 40px;
 }
 
 
-.exchange-card:nth-child(3n + 1) {
-    --bg-color: #811c1c; 
-}
-
-
-.exchange-card:nth-child(3n + 2) {
-    --bg-color: #206620; 
-}
-
-
-.exchange-card:nth-child(3n + 3) {
-    --bg-color: #2c2c85;
-}
 
 .card-image-container {
     height: 80px;
