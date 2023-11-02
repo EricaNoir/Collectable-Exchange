@@ -5,10 +5,10 @@ function EditUserInfoFloating({ user, closeWindow }) {
         userEmail: user.userEmail,
         userPhone: user.userPhone || "",
         userFacebook: user.userFacebook || "",
-        buyingCollectableInterestedSet: user.buyingCollectableInterested ? user.buyingCollectableInterested.split(':')[0] : "",
-        buyingCollectableInterestedName: user.buyingCollectableInterested ? user.buyingCollectableInterested.split(':')[1] : "",
-        sellingCollectableInterestedSet: user.sellingCollectableInterested ? user.sellingCollectableInterested.split(':')[0] : "",
-        sellingCollectableInterestedName: user.sellingCollectableInterested ? user.sellingCollectableInterested.split(':')[1] : "",
+        buyingCollectableInterestedSet: user.buyingCollectableInterested ? user.buyingCollectableInterested.split('---')[0] : "",
+        buyingCollectableInterestedName: user.buyingCollectableInterested ? user.buyingCollectableInterested.split('---')[1] : "",
+        sellingCollectableInterestedSet: user.sellingCollectableInterested ? user.sellingCollectableInterested.split('---')[0] : "",
+        sellingCollectableInterestedName: user.sellingCollectableInterested ? user.sellingCollectableInterested.split('---')[1] : "",
         userImage: null,
     });
     const [changed, setChanged] = React.useState(false);
@@ -65,11 +65,11 @@ function EditUserInfoFloating({ user, closeWindow }) {
         body.append("userFacebook", editedUser.userFacebook);
         body.append("buyingCollectableInterested",
             (editedUser.buyingCollectableInterestedSet && editedUser.buyingCollectableInterestedName)
-                ? editedUser.buyingCollectableInterestedSet + ":" + editedUser.buyingCollectableInterestedName
+                ? editedUser.buyingCollectableInterestedSet + "---" + editedUser.buyingCollectableInterestedName
                 : null);
         body.append("sellingCollectableInterested",
             (editedUser.sellingCollectableInterestedSet && editedUser.sellingCollectableInterestedName)
-                ? editedUser.sellingCollectableInterestedSet + ":" + editedUser.sellingCollectableInterestedName
+                ? editedUser.sellingCollectableInterestedSet + "---" + editedUser.sellingCollectableInterestedName
                 : null);
         body.append("userImage", editedUser.userImage);
 

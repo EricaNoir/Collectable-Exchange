@@ -113,15 +113,21 @@ function UserProfilePage() {
                                     <strong>
                                         Most Desired Collectible to Buy:{" "}
                                     </strong>
-                                    {user.buyingCollectableInterested ||
-                                        "Not provided"}
+                                    {user.buyingCollectableInterested
+                                        ? ("Collectable Set: " + user.buyingCollectableInterested.split("---")[0]
+                                            + ", Collectable Name: "
+                                            + user.buyingCollectableInterested.split("---")[1])
+                                        : "Not provided"}
                                 </p>
                                 <p>
                                     <strong>
                                         Most Desired Collectible to Sell:{" "}
                                     </strong>
-                                    {user.sellingCollectableInterested ||
-                                        "Not provided"}
+                                    {user.sellingCollectableInterested
+                                        ? ("Collectable Set: " + user.sellingCollectableInterested.split("---")[0]
+                                            + ", Collectable Name: "
+                                            + user.sellingCollectableInterested.split("---")[1])
+                                        : "Not provided"}
                                 </p>
                             </div>
                         </div>
@@ -136,7 +142,10 @@ function UserProfilePage() {
                         </h2>
                         <div className="user-trade-history-card-container">
                             {tradeList.map((trade) => (
-                                <TradeHistoryCard trade={trade} />
+                                <TradeHistoryCard
+                                    key={trade.tradeId}
+                                    trade={trade}
+                                />
                             ))}
                         </div>
                     </>
