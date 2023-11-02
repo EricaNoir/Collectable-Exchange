@@ -27,6 +27,7 @@ body {
     margin: 0;
     display: flex;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
@@ -83,6 +84,6 @@ button:focus-visible {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding-top: 70px; /* Adjust based on the exact height of your navbar */
 }

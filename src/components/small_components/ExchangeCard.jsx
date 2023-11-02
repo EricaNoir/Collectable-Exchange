@@ -14,16 +14,40 @@
 function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
     return (
         <div className="exchange-card">
-            <img src={`/api/images/${exchange.collectableImage}`} alt="item image"></img>
-            <h3 className="exchange-card-set">{exchange.collectableSet}</h3>
-            <h3 className="exchange-card-name">{exchange.collectableName}</h3>
-            <p className="exchange-card-price">{exchange.price}</p>
-            <p className="exchange-card-selling-or-buying">{exchange.sellingOrBuying}</p>
+            <div className="exchange-card-1">
+                <div className="card-image-container">
+                    <img
+                        src={`/api/images/${exchange.collectableImage}`}
+                        alt="item image"
+                    ></img>
+                </div>
+                <h3 className="exchange-card-name-and-set">
+                    {`${exchange.collectableName} from ${exchange.collectableSet}`}
+                </h3>
+            </div>
 
-            <button className="exchange-card-user-info-btn" onClick={() => onUserInfoClick(exchange.ownerName)}>See User Info</button>
-            <button className="exchange-card-send-request-btn" onClick={() => onSendRequestClick(exchange.exchangeId)}>Send Request</button>
+            <div className="exchange-card-2">
+                <p className="exchange-card-price">{`Price: AU$${exchange.price}`}</p>
+                <p className="exchange-card-selling-or-buying">
+                    {`Selling or Buying: ${exchange.sellingOrBuying}`}
+                </p>
+            </div>
+            <div className="exchange-card-3">
+                <button
+                    className="exchange-card-user-info-btn"
+                    onClick={() => onUserInfoClick(exchange.ownerName)}
+                >
+                    See User Info
+                </button>
+                <button
+                    className="exchange-card-send-request-btn"
+                    onClick={() => onSendRequestClick(exchange.exchangeId)}
+                >
+                    Send Request
+                </button>
+            </div>
         </div>
-    )
+    );
 }
 
-export default ExchangeCard
+export default ExchangeCard;
