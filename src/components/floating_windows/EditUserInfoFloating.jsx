@@ -5,15 +5,36 @@ function EditUserInfoFloating({ user, closeWindow }) {
         userEmail: user.userEmail,
         userPhone: user.userPhone,
         userFacebook: user.userFacebook,
-        buyingCollectableInterested: user.buyingCollectableInterested,
-        sellingCollectableInterested: user.sellingCollectableInterested,
+        buyingCollectableInterestedSet: !user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[0] : null,
+        buyingCollectableInterestedName: !user.buyingCollectableInterested ? user.buyingCollectableInterested.split(' ')[1] : null,
+        sellingCollectableInterestedSet: !user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[0] : null,
+        sellingCollectableInterestedName: !user.sellingCollectableInterested ? user.sellingCollectableInterested.split(' ')[1] : null,
         userImage: null,
     });
     const [changed, setChanged] = useState(false);
+    // Get current collectable category as a Json
+    const [collectableCategory, setCollectableCategory] = React.useState(null);
+
+    // load collectable category
+    React.useEffect(() => {
+        fetch("/api/currentAuthorisedCollectable")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((collectableCategoryData) => {
+                setCollectableCategory(collectableCategoryData);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+    }, []);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file.size > 1024*1024) {
+        if (file.size > 1024 * 1024) {
             alert("Maximum image size: 1MB!");
             event.target.value = "";
             return;
@@ -42,8 +63,14 @@ function EditUserInfoFloating({ user, closeWindow }) {
         body.append("userEmail", editedUser.userEmail);
         body.append("userPhone", editedUser.userPhone);
         body.append("userFacebook", editedUser.userFacebook);
-        body.append("buyingCollectableInterested", editedUser.buyingCollectableInterested);
-        body.append("sellingCollectableInterested", editedUser.sellingCollectableInterested);
+        body.append("buyingCollectableInterested",
+            (editedUser.buyingCollectableInterestedSet && editedUser.buyingCollectableInterestedName)
+                ? editedUser.buyingCollectableInterestedSet + " " + editedUser.buyingCollectableInterestedName
+                : null);
+        body.append("sellingCollectableInterested",
+            (editedUser.sellingCollectableInterestedSet && editedUser.sellingCollectableInterestedName)
+                ? editedUser.sellingCollectableInterestedSet + " " + editedUser.sellingCollectableInterestedName
+                : null);
         body.append("userImage", editedUser.userImage);
 
         fetch(url, {
@@ -59,66 +86,132 @@ function EditUserInfoFloating({ user, closeWindow }) {
             });
     };
     return (
-        <div className="floating-window">
-            <div className="form-container">
-                <h1>Edit a collectable trade</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="price">User Price:</label>
-                        <input
-                            type="number"
-                            name="price"
-                            placeholder={editedUser.price}
-                            value={editedUser.price}
-                            onChange={handleInputChange}
-                        />
+        <>
+
+            <div className="floating-window">
+                {collectableCategory !== null ? (
+                    <div className="form-container">
+                        <h1>Edit your profile</h1>
+                        <form onSubmit={handleSubmit}>
+                            <div>
+                                <label htmlFor="userEmail">New Email:</label>
+                                <input
+                                    type="email"
+                                    name="userEmail"
+                                    placeholder={editedUser.userEmail}
+                                    value={editedUser.userEmail}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="userPhone">New Phone:</label>
+                                <input
+                                    type="tel"
+                                    name="userPhone"
+                                    placeholder={editedUser.userPhone || "Not provided."}
+                                    value={editedUser.userPhone}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="userFacebook">New Facebook:</label>
+                                <input
+                                    type="text"
+                                    name="userFacebook"
+                                    placeholder={editedUser.userFacebook || "Not provided."}
+                                    value={editedUser.userFacebook}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div>
+                                <label htmlFor="buyingCollectableInterestedSet">Set want to buy:</label>
+                                <select
+                                    name="buyingCollectableInterestedSet"
+                                    onChange={handleInputChange}
+                                    value={editedUser.buyingCollectableInterestedSet}
+                                >
+                                    <option value={null} disabled>
+                                        Select a set
+                                    </option>
+                                    {Object.keys(collectableCategory).map((set) => (
+                                        <option key={set}>{set}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="buyingCollectableInterestedName">In this set, card want to buy:</label>
+                                {editedUser.buyingCollectableInterestedSet && (
+                                    <select
+                                        name="buyingCollectableInterestedName"
+                                        onChange={handleInputChange}
+                                        value={editedUser.buyingCollectableInterestedName}
+                                        required
+                                    >
+                                        <option value={null} disabled>
+                                            Select an item
+                                        </option>
+                                        {collectableCategory[editedUser.buyingCollectableInterestedSet].map(
+                                            (name) => (
+                                                <option key={name}>{name}</option>
+                                            )
+                                        )}
+                                    </select>
+                                )}
+                            </div>
+                            <div>
+                                <label htmlFor="sellingCollectableInterestedSet">Set want to sell:</label>
+                                <select
+                                    name="sellingCollectableInterestedSet"
+                                    onChange={handleInputChange}
+                                    value={editedUser.sellingCollectableInterestedSet}
+                                >
+                                    <option value={null} disabled>
+                                        Select a set
+                                    </option>
+                                    {Object.keys(collectableCategory).map((set) => (
+                                        <option key={set}>{set}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label htmlFor="sellingCollectableInterestedName">In this set, card want to sell:</label>
+                                {editedUser.sellingCollectableInterestedSet && (
+                                    <select
+                                        name="sellingCollectableInterestedName"
+                                        onChange={handleInputChange}
+                                        value={editedUser.sellingCollectableInterestedName}
+                                        required
+                                    >
+                                        <option value={null} disabled>
+                                            Select an item
+                                        </option>
+                                        {collectableCategory[editedUser.sellingCollectableInterestedSet].map(
+                                            (name) => (
+                                                <option key={name}>{name}</option>
+                                            )
+                                        )}
+                                    </select>
+                                )}
+                            </div>
+                            <div>
+                                <label htmlFor="userImage">User Image: </label>
+                                <input
+                                    type="file"
+                                    name="userImage"
+                                    id="userImage"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                />
+                            </div>
+                            <button type="submit" disabled={!changed}>Submit</button>
+                            <button onClick={closeWindow}>Close</button>
+                        </form>
                     </div>
-                    <div>
-                        <label htmlFor="sellingOrBuying">Trade Type:</label>
-                        <select
-                            name="sellingOrBuying"
-                            onChange={handleInputChange}
-                            value={editedUser.sellingOrBuying}
-                        >
-                            <option value={editedUser.sellingOrBuying}>
-                                Leave unchanged
-                            </option>
-                            <option>SELLING</option>
-                            <option>BUYING</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="priority">
-                            Trade Priority: (3 is the highest)
-                        </label>
-                        <select
-                            name="priority"
-                            onChange={handleInputChange}
-                            value={editedUser.priority}
-                        >
-                            <option value={editedUser.priority}>
-                                Leave unchanged
-                            </option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="collectableImage">User Image: </label>
-                        <input
-                            type="file"
-                            name="collectableImage"
-                            id="collectableImage"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                        />
-                    </div>
-                    <button type="submit" disabled={!changed}>Submit</button>
-                    <button onClick={closeWindow}>Close</button>
-                </form>
+                ) : (
+                    <div> Loading...</div>
+                )}
             </div>
-        </div>
+        </>
     );
 }
 
