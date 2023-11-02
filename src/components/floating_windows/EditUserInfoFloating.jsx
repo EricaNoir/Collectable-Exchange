@@ -11,6 +11,11 @@ function EditUserInfoFloating({ user, closeWindow }) {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
+        if (file.size > 1024*1024) {
+            alert("Maximum image size: 1MB!");
+            event.target.value = "";
+            return;
+        }
         setEditedUser({
             ...editedUser,
             userImage: file,
