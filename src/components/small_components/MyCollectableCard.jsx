@@ -22,14 +22,27 @@
 function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
     return (
         <div className="my-collectable-card">
-            <img src={`/api/images/${exchange.collectableImage}`} alt="item image"></img>
-            <h3 className="my-collectable-card-name">{exchange.collectableName}</h3>
-            <h3 className="my-collectable-card-set">{exchange.collectableSet}</h3>
-            <p className="my-collectable-card-price">{exchange.price}</p>
-            <p className="my-collectable-card-selling-or-buying">
-                {exchange.sellingOrBuying}
-            </p>
+            <div className="my-collectable-card-1">
+                <div className="my-collectable-card-image-container">
+                    <img
+                        src={`/api/images/${exchange.collectableImage}`}
+                        alt="item image"
+                    ></img>
+                </div>
 
+                <h3 className="my-collectable-card-name-and-set">
+                    {`${exchange.collectableName} from ${exchange.collectableSet}`}
+                </h3>
+            </div>
+
+            <div className="my-collectable-card-2">
+                <p className="my-collectable-card-price">{`Price: AU$${exchange.price}`}</p>
+                <p className="my-collectable-card-selling-or-buying">
+                    {`Selling or Buying: ${exchange.sellingOrBuying}`}
+                </p>
+            </div>
+
+            <div className="my-collectable-card-3">
             <button
                 className="my-collectable-card-edit-btn"
                 onClick={() => onEditClick(exchange)}
@@ -42,6 +55,8 @@ function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
             >
                 Toggle
             </button>
+            </div>
+
         </div>
     );
 }

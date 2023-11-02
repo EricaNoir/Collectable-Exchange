@@ -5,10 +5,10 @@ import MyCollectableCard from "./small_components/MyCollectableCard";
 import UserInfoFloating from "./floating_windows/UserInfoFloating";
 import EditCollectableFloating from "./floating_windows/EditCollectableFloating";
 import CreateCollectableFloating from "./floating_windows/CreateCollectableFloating";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import "../css/homePage.css";
 
 function HomePage() {
-
     const { userName } = useParams();
 
     const [currentSection, setCurrentSection] = React.useState("plaza");
@@ -42,8 +42,15 @@ function HomePage() {
             .then((data) => {
                 alert("Response as text: " + data);
                 // remove traded exchanges
-                if (data === "Success." || data === "Collectable already occupied.") {
-                    setExchangeList(exchangeList.filter((exchange) => exchange.exchangeId !== exchangeId));
+                if (
+                    data === "Success." ||
+                    data === "Collectable already occupied."
+                ) {
+                    setExchangeList(
+                        exchangeList.filter(
+                            (exchange) => exchange.exchangeId !== exchangeId
+                        )
+                    );
                 }
             })
             .catch((error) => {
@@ -111,30 +118,41 @@ function HomePage() {
     // Get exchangeList as an array of json
     const [exchangeList, setExchangeList] = React.useState(null);
     const [searchTerm, setSearchTerm] = React.useState({
-        ownerName: '',
-        collectableSet: '',
-        collectableName: ''
+        ownerName: "",
+        collectableSet: "",
+        collectableName: "",
     });
-    const [ownerSearchName, setOwnerSearchName] = React.useState('');
-    const [collectableSearchSet, setCollectableSearchSet] = React.useState('');
-    const [collectableSearchName, setCollectableSearchName] = React.useState('');
+    const [ownerSearchName, setOwnerSearchName] = React.useState("");
+    const [collectableSearchSet, setCollectableSearchSet] = React.useState("");
+    const [collectableSearchName, setCollectableSearchName] =
+        React.useState("");
 
     // search input with name
     function handleSearchNameInput(ownerName) {
-        setSearchTerm({ ownerName: ownerName, collectableSet: '', collectableName: '' });
-        setCollectableSearchSet('');
-        setCollectableSearchName('');
+        setSearchTerm({
+            ownerName: ownerName,
+            collectableSet: "",
+            collectableName: "",
+        });
+        setCollectableSearchSet("");
+        setCollectableSearchName("");
     }
     // search input with set and card
     function handleSearchCardInput(collectableSet, collectableName) {
-        setSearchTerm({ ownerName: '', collectableSet: collectableSet, collectableName: collectableName });
-        setOwnerSearchName('');
+        setSearchTerm({
+            ownerName: "",
+            collectableSet: collectableSet,
+            collectableName: collectableName,
+        });
+        setOwnerSearchName("");
     }
 
     function handleSearch(searchTerm, page) {
         // search by owner
-        if (searchTerm.ownerName !== '') {
-            fetch(`/api/collectableExchangeList/searchName?ownerName=${searchTerm.ownerName}&page=${page}`)
+        if (searchTerm.ownerName !== "") {
+            fetch(
+                `/api/collectableExchangeList/searchName?ownerName=${searchTerm.ownerName}&page=${page}`
+            )
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
@@ -149,8 +167,10 @@ function HomePage() {
                 });
         }
         // search by card set and name
-        else if (searchTerm.collectableSet !== '') {
-            fetch(`/api/collectableExchangeList/searchCard?collectableSet=${searchTerm.collectableSet}&collectableName=${searchTerm.collectableName}&page=${page}`)
+        else if (searchTerm.collectableSet !== "") {
+            fetch(
+                `/api/collectableExchangeList/searchCard?collectableSet=${searchTerm.collectableSet}&collectableName=${searchTerm.collectableName}&page=${page}`
+            )
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
@@ -239,11 +259,15 @@ function HomePage() {
             });
     }, []);
 
+    const cardContainerRef = React.useRef(null);
+
+    React.useEffect(() => {
+        cardContainerRef.current.scrollTop = 0;
+    }, [page]);
+
     return (
         <>
-
             <Navbar userName={userName} />
-            <h1>This is the HomePage</h1>
             {activeWindow.type === "userInfo" && (
                 <UserInfoFloating
                     closeWindow={closeFloatingWindow}
@@ -252,7 +276,11 @@ function HomePage() {
             )}
 
             {activeWindow.type === "create" && collectableCategory !== null && (
-                <CreateCollectableFloating nameList={collectableCategory} closeWindow={closeFloatingWindow} onCreateSuccess={handleCreateSuccess} />
+                <CreateCollectableFloating
+                    nameList={collectableCategory}
+                    closeWindow={closeFloatingWindow}
+                    onCreateSuccess={handleCreateSuccess}
+                />
             )}
 
             {activeWindow.type === "edit" && (
@@ -271,7 +299,7 @@ function HomePage() {
                             backgroundColor:
                                 currentSection === "plaza"
                                     ? "#333"
-                                    : "transparent",
+                                    : "lightgray",
                             color:
                                 currentSection === "plaza" ? "white" : "black",
                         }}
@@ -285,7 +313,7 @@ function HomePage() {
                             backgroundColor:
                                 currentSection === "list"
                                     ? "#333"
-                                    : "transparent",
+                                    : "lightgray",
                             color:
                                 currentSection === "list" ? "white" : "black",
                         }}
@@ -297,87 +325,158 @@ function HomePage() {
                     <>
                         <div className="search-bar">
                             <div className="search-name">
-                                <label>
-                                    Search by owner name:
-                                    <input
-                                        type="text"
-                                        placeholder="Owner Name"
-                                        value={ownerSearchName}
-                                        onChange={(e) => setOwnerSearchName(e.target.value)}
-                                    />
-                                </label>
-                                <button className="search-btn" onClick={() => handleSearchNameInput(ownerSearchName)}>Search</button>
+                                <div className="search-name-wrapper">
+                                    <label className="search-name-label">
+                                        Search by owner name:
+                                        <input
+                                            type="text"
+                                            placeholder="Owner Name"
+                                            value={ownerSearchName}
+                                            onChange={(e) =>
+                                                setOwnerSearchName(
+                                                    e.target.value
+                                                )
+                                            }
+                                        />
+                                    </label>
+                                </div>
+
+                                <button
+                                    className="search-btn"
+                                    onClick={() =>
+                                        handleSearchNameInput(ownerSearchName)
+                                    }
+                                >
+                                    Search
+                                </button>
                             </div>
                             {collectableCategory !== null ? (
                                 <div className="search-card">
-                                    <label htmlFor="collectableSet">Collectable Set:</label>
-                                    <select
-                                        name="collectableSet"
-                                        onChange={(e) => setCollectableSearchSet(e.target.value)}
-                                        value={collectableSearchSet}
-                                        required
-                                    >
-                                        <option value="">
-                                            Select a set
-                                        </option>
-                                        {Object.keys(collectableCategory).map((set) => (
-                                            <option key={set}>{set}</option>
-                                        ))}
-                                    </select>
+                                    <div className="search-name-wrapper">
+                                        <div className="search-wrapper">
+                                            <label htmlFor="collectableSet">
+                                                Select Collectable Set:
+                                                <select
+                                                    name="collectableSet"
+                                                    onChange={(e) =>
+                                                        setCollectableSearchSet(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    value={collectableSearchSet}
+                                                    required
+                                                >
+                                                    <option value="">
+                                                        Select a set
+                                                    </option>
+                                                    {Object.keys(
+                                                        collectableCategory
+                                                    ).map((set) => (
+                                                        <option key={set}>
+                                                            {set}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </label>
+                                        </div>
+                                        <div className="search-wrapper">
+                                            <label htmlFor="collectableName">
+                                                Select Collectable Name:
+                                                {collectableSearchSet !== "" ? (
+                                                    <select
+                                                        name="collectableName"
+                                                        onChange={(e) =>
+                                                            setCollectableSearchName(
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        value={
+                                                            collectableSearchName
+                                                        }
+                                                    >
+                                                        <option value="">
+                                                            Select a name
+                                                        </option>
+                                                        {collectableCategory[
+                                                            collectableSearchSet
+                                                        ].map((name) => (
+                                                            <option key={name}>
+                                                                {name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                ) : (
+                                                    <select disabled>
+                                                        <option value="Select a name">
+                                                            Select a name
+                                                        </option>
+                                                    </select>
+                                                )}
+                                            </label>
+                                        </div>
+                                    </div>
 
-                                    <label htmlFor="collectableName">Collectable Name:</label>
-                                    {collectableSearchSet !== '' ? (
-                                        <select
-                                            name="collectableName"
-                                            onChange={(e) => setCollectableSearchName(e.target.value)}
-                                            value={collectableSearchName}
-                                        >
-                                            <option value="">
-                                                Select a name
-                                            </option>
-                                            {collectableCategory[collectableSearchSet].map(
-                                                (name) => (
-                                                    <option key={name}>{name}</option>
-                                                )
-                                            )}
-                                        </select>) : (
-                                        <select disabled>
-                                            <option value="Select a name">Select a name</option>
-                                        </select>
-                                    )}
-                                    <button className="search-btn" onClick={() => handleSearchCardInput(collectableSearchSet, collectableSearchName)}>Search</button>
-                                </div>) : (
-                                <div>
-                                    Loading...
+                                    <button
+                                        className="search-btn"
+                                        onClick={() =>
+                                            handleSearchCardInput(
+                                                collectableSearchSet,
+                                                collectableSearchName
+                                            )
+                                        }
+                                    >
+                                        Search
+                                    </button>
                                 </div>
+                            ) : (
+                                <div>Loading...</div>
                             )}
                         </div>
-                        <div className="page-bar">
+                        {/* <div className="page-bar">
                             <button className="change-page-btn" onClick={prePage}>Previous Page</button>
                             Current Page: {page}
                             <button className="change-page-btn" onClick={nextPage}>Next Page</button>
-                        </div>
+                        </div> */}
+                        <h3>Avaliable Exchanges</h3>
                         <div
                             className="card-container"
                             id="exchange-card-container"
+                            ref={cardContainerRef}
                         >
-                            {(exchangeList !== null && exchangeList.length > 0) ? (exchangeList.map((exchange) => (
-                                <ExchangeCard
-                                    key={exchange.exchangeId}
-                                    exchange={exchange}
-                                    onUserInfoClick={handleUserInfoClick}
-                                    onSendRequestClick={handleSendRequestClick}
-                                />
-                            ))) : exchangeList !== null ? (
-                                <div className="empty-list">The list is empty.</div>
+                            {exchangeList !== null &&
+                            exchangeList.length > 0 ? (
+                                exchangeList.map((exchange) => (
+                                    <ExchangeCard
+                                        key={exchange.exchangeId}
+                                        exchange={exchange}
+                                        onUserInfoClick={handleUserInfoClick}
+                                        onSendRequestClick={
+                                            handleSendRequestClick
+                                        }
+                                    />
+                                ))
+                            ) : exchangeList !== null ? (
+                                <div className="empty-list">
+                                    The list is empty.
+                                </div>
                             ) : (
                                 <div>Loading...</div>
                             )}
                         </div>
                         <div className="page-bar">
-                            <button className="change-page-btn" onClick={prePage}>Previous Page</button>
+                            <button
+                                className="change-page-btn"
+                                onClick={prePage}
+                            >
+                                Previous Page
+                            </button>
                             Current Page: {page}
-                            <button className="change-page-btn" onClick={nextPage}>Next Page</button>
+                            <button
+                                className="change-page-btn"
+                                onClick={nextPage}
+                            >
+                                Next Page
+                            </button>
                         </div>
                     </>
                 ) : currentSection === "list" ? (

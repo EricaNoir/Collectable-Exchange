@@ -1,0 +1,258 @@
+/* homePage.css */
+
+.body-container {
+    padding-left: 100px;
+    padding-right: 100px;
+    max-width: 1000px;
+    width: 80%;
+}
+
+.nav-in-home-page {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nav-in-home-page-btn {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    color: black;
+    margin: 0 10px;
+}
+
+.nav-in-home-page-btn:hover,
+.nav-in-home-page-btn:focus {
+    background-color: #f0f0f0;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-direction: column;
+}
+
+.search-name,
+.search-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 20px;
+}
+
+.search-name-wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    height: 64px;
+    justify-content: space-between;
+}
+
+.search-name-label {
+    width: 100%;
+    padding-right: 20px;
+}
+
+.search-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.search-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 64px;
+    padding-right: 20px;
+}
+
+.search-btn {
+    padding: 5px 15px;
+    margin-left: 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    height: 36px;
+}
+
+.search-btn:hover,
+.search-btn:focus {
+    background-color: #45a049;
+}
+
+.page-bar {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+.change-page-btn {
+    padding: 5px 15px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+}
+
+.change-page-btn:hover,
+.change-page-btn:focus {
+    background-color: #45a049;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: calc(100vh - 480px);
+    overflow-y: scroll;
+}
+
+.add-my-item-btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    cursor: pointer;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.add-my-item-btn:hover,
+.add-my-item-btn:focus {
+    background-color: #45a049;
+}
+
+.empty-list {
+    text-align: center;
+    font-size: 18px;
+    padding: 50px;
+}
+
+.exchange-card {
+    width: 420px;
+    height: 180px;
+    background-color: var(--bg-color, #206620);
+    border-radius: 24px;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+/* 如果是第一个元素，使用这种颜色 */
+.exchange-card:nth-child(3n + 1) {
+    --bg-color: #811c1c; /* 红色 */
+}
+
+/* 如果是第二个元素，使用这种颜色 */
+.exchange-card:nth-child(3n + 2) {
+    --bg-color: #206620; /* 绿色 */
+}
+
+/* 如果是第三个元素，使用这种颜色 */
+.exchange-card:nth-child(3n + 3) {
+    --bg-color: #2c2c85; /* 蓝色 */
+}
+
+.card-image-container {
+    height: 80px;
+}
+.exchange-card img {
+    height: 100%;
+}
+
+.exchange-card-1 {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.exchange-card-1 h3 {
+    width: 250px;
+    text-align: right;
+    color: white;
+}
+
+.exchange-card-2 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.exchange-card-2 p {
+    color: white;
+}
+
+.exchange-card-3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.list-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    height: calc(100vh - 230px);
+    padding-top: 30px;
+    justify-content: flex-start;
+}
+
+.my-collectable-card {
+    width: 220px;
+    height: 300px;
+    background-color: var(--bg-color, #206620);
+    border-radius: 24px;
+    padding: 20px;
+    margin: 36px;
+}
+
+.add-my-item-btn {
+    width: 260px;
+    height: 340px;
+    background-color: transparent;
+    border-radius: 24px;
+    padding: 20px;
+    border: 5px dashed #206620;
+    color: #206620;
+    font-size: 200px;
+    font-weight: 100;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 36px;
+}
+
+.add-my-item-btn:hover {
+    background-color: transparent;
+    border: 5px dashed #9c9c9c;
+    color: #a3a3a3;
+}
+
+.my-collectable-card-image-container {
+    height: 100px;
+}
+
+.my-collectable-card-image-container img {
+    height: 100%;
+}
+
+.my-collectable-card-1 h3 {
+    color: white;
+}
+.my-collectable-card-2 p {
+    color: white;
+}
+.my-collectable-card-3 {
+    display: flex;
+    justify-content: space-between;
+}
