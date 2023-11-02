@@ -36,7 +36,7 @@ function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
             </div>
 
             <div className="my-collectable-card-2">
-                <p className="my-collectable-card-price">{`Price: AU$${exchange.price}`}</p>
+                <p className="my-collectable-card-price">{`Price:  AU$${exchange.price}`}</p>
                 <p className="my-collectable-card-selling-or-buying">
                     {`Selling or Buying: ${exchange.sellingOrBuying}`}
                 </p>

@@ -16,32 +16,84 @@
 
 function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
     return (
-        <div className="trade-request-card">
+        <>
             {myName === trade.requesterName ? (
-                <div className="outgoing-request-card">
-                    <h2 className="other-name">My {trade.sellingOrBuying === "SELLING" ? "buying" : "selling"} request to {trade.ownerName}</h2>
-                    <img src="/assets/img/default-avatar.jpg" alt="item image"></img>
-                    <h3 className="trade-request-card-set">{trade.collectableSet}</h3>
-                    <h3 className="trade-request-card-name">{trade.collectableName}</h3>
-                    <p className="trade-request-card-price">{trade.price}</p>
-
-                    <button className="trade-request-card-decline-btn" onClick={() => onDeclineClick(trade.exchangeId)}>Cancel</button>
+                <div className="trade-request-card">
+                    <div className="outgoing-request-card-1">
+                        <h2 className="other-name">
+                            My{" "}
+                            {trade.sellingOrBuying === "SELLING"
+                                ? "buying"
+                                : "selling"}{" "}
+                            request to {trade.ownerName}
+                        </h2>
+                        <div className="request-image-container">
+                            <img
+                                src="/assets/img/default-avatar.jpg"
+                                alt="item image"
+                            ></img>
+                        </div>
+                    </div>
+                    <div className="outgoing-request-card-2">
+                        <h3 className="trade-request-card-name-and-set">
+                            {`${trade.collectableName} from ${trade.collectableSet}`}
+                        </h3>
+                        <p className="trade-request-card-price">
+                            {`Price:  AU$${trade.price}`}
+                        </p>
+                    </div>
+                    <div className="outgoing-request-card-3">
+                        <button
+                            className="trade-request-card-decline-btn"
+                            onClick={() => onDeclineClick(trade.exchangeId)}
+                        >
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             ) : (
-                <div className="incoming-request-card">
-                    <h2 className="other-name">{trade.requesterName}'s {trade.sellingOrBuying === "SELLING" ? "buying" : "selling"} request to me</h2>
-                    <img src="/assets/img/default-avatar.jpg" alt="item image"></img>
-                    <h3 className="trade-request-card-set">{trade.collectableSet}</h3>
-                    <h3 className="trade-request-card-name">{trade.collectableName}</h3>
-                    <p className="trade-request-card-price">{trade.price}</p>
-
-                    <button className="trade-request-card-confirm-btn" onClick={() => onConfirmClick(trade.exchangeId)}>Confirm</button>
-                    <button className="trade-request-card-decline-btn" onClick={() => onDeclineClick(trade.exchangeId)}>Decline</button>
+                <div className="trade-request-card">
+                    <div className="outgoing-request-card-1">
+                        <h2 className="other-name">
+                            {trade.requesterName}'s{" "}
+                            {trade.sellingOrBuying === "SELLING"
+                                ? "buying"
+                                : "selling"}{" "}
+                            request to me
+                        </h2>
+                        <div className="request-image-container">
+                            <img
+                                src="/assets/img/default-avatar.jpg"
+                                alt="item image"
+                            ></img>
+                        </div>
+                    </div>
+                    <div className="outgoing-request-card-2">
+                        <h3 className="trade-request-card-name-and-set">
+                            {`${trade.collectableName} from ${trade.collectableSet}`}
+                        </h3>
+                        <p className="trade-request-card-price">
+                            {trade.price}
+                        </p>
+                    </div>
+                    <div className="outgoing-request-card-3">
+                        <button
+                            className="trade-request-card-confirm-btn"
+                            onClick={() => onConfirmClick(trade.exchangeId)}
+                        >
+                            Confirm
+                        </button>
+                        <button
+                            className="trade-request-card-decline-btn"
+                            onClick={() => onDeclineClick(trade.exchangeId)}
+                        >
+                            Decline
+                        </button>
+                    </div>
                 </div>
-            )
-            }
-        </div >
-    )
+            )}
+        </>
+    );
 }
 
 export default TradeRequestCard;

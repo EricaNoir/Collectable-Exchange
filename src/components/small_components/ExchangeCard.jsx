@@ -27,7 +27,7 @@ function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
             </div>
 
             <div className="exchange-card-2">
-                <p className="exchange-card-price">{`Price: AU$${exchange.price}`}</p>
+                <p className="exchange-card-price">{`Price:  AU$${exchange.price}`}</p>
                 <p className="exchange-card-selling-or-buying">
                     {`Selling or Buying: ${exchange.sellingOrBuying}`}
                 </p>

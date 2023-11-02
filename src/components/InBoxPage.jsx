@@ -1,9 +1,10 @@
 import Navbar from "./small_components/Navbar";
 import React from "react";
 import TradeRequestCard from "./small_components/TradeRequestCard";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import "../css/inBoxPage.css";
 
-function InBoxPage({ }) {
+function InBoxPage({}) {
     const { userName } = useParams();
     // Get my trade as an array of json
     const [myTrade, setMyTrade] = React.useState(null);
@@ -37,7 +38,11 @@ function InBoxPage({ }) {
                 alert("Response as text: " + data);
                 // remove traded exchanges
                 if (data === "Success.") {
-                    setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
+                    setMyTrade(
+                        myTrade.filter(
+                            (trade) => trade.exchangeId !== exchangeId
+                        )
+                    );
                 }
             })
             .catch((error) => {
@@ -57,7 +62,11 @@ function InBoxPage({ }) {
                 alert("Response as text: " + data);
                 // remove traded exchanges
                 if (data === "Success.") {
-                    setMyTrade(myTrade.filter((trade) => trade.exchangeId !== exchangeId));
+                    setMyTrade(
+                        myTrade.filter(
+                            (trade) => trade.exchangeId !== exchangeId
+                        )
+                    );
                 }
             })
             .catch((error) => {
@@ -68,34 +77,30 @@ function InBoxPage({ }) {
     return (
         <>
             <Navbar userName={userName} />
-            <h1>This is the InBoxPage</h1>
-            {(myTrade !== null && myTrade.length > 0) ? (
-                <div
-                    className="card-container"
-                    id="trade-request-card-container"
-                >
-                    {myTrade.map((trade) => (
-                        <TradeRequestCard
-                            key={trade.exchangeId}
-                            trade={trade}
-                            myName={userName}
-                            onConfirmClick={handleConfirmClick}
-                            onDeclineClick={handleDeclineClick}
-                        />
-                    ))}
-                </div>
-            ) : myTrade !== null ? (
-                <div>
-                    No ongoing trade.
-                </div>
-            ) : (
-                <div>
-                    Loading...
-                </div>
-            )
-            }
+            <section className="body-container">
+                <h1>You Inbox </h1>
+                {myTrade !== null && myTrade.length > 0 ? (
+                    <div
+                        className="request-card-container"
+                    >
+                        {myTrade.map((trade) => (
+                            <TradeRequestCard
+                                key={trade.exchangeId}
+                                trade={trade}
+                                myName={userName}
+                                onConfirmClick={handleConfirmClick}
+                                onDeclineClick={handleDeclineClick}
+                            />
+                        ))}
+                    </div>
+                ) : myTrade !== null ? (
+                    <div>No ongoing trade.</div>
+                ) : (
+                    <div>Loading...</div>
+                )}
+            </section>
         </>
-    )
+    );
 }
 
-export default InBoxPage
+export default InBoxPage;
