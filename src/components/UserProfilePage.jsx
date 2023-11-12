@@ -4,6 +4,13 @@ import Navbar from "./small_components/Navbar";
 import EditUserInfoFloating from "./floating_windows/EditUserInfoFloating";
 import "../css/userProfilePage.css";
 import TradeHistoryCard from "./small_components/TradeHistoryCard"
+// icon
+import editIcon from '../static/edit.png'
+import emailIcon from '../static/email.png'
+import phoneIcon from '../static/phone.png'
+import facebookIcon from '../static/facebook.png'
+import buyIcon from '../static/buy.png'
+import saleIcon from '../static/sale.png'
 
 function UserProfilePage() {
     const { userName } = useParams();
@@ -79,50 +86,67 @@ function UserProfilePage() {
                         <div className="user-info-container">
                             <div className="user-profile-2">
                                 <h1>User Profile</h1>
-                                <img src={user.userImage} alt="User Avatar" />
                             </div>
                             <div className="user-profile-1">
-                                <h2>Welcome, {user.username}</h2>
+                                <h2>Welcome</h2>
                                 <button
                                     className="profile-edit-btn"
                                     onClick={() => handleEditClick(user)}
                                 >
-                                    Edit
+                                    <img src={editIcon} />
+                                    <span>Edit</span>
                                 </button>
                             </div>
-                            <div className="user-profile-3">
-                                <p>
-                                    <strong>Username: </strong>
-                                    {user.username}
-                                </p>
-                                <p>
-                                    <strong>Email: </strong>
-                                    {user.userEmail}
-                                </p>
-                                <p>
-                                    <strong>Phone: </strong>
-                                    {user.userPhone || "Not provided"}
-                                </p>
-                                <p>
-                                    <strong>Facebook: </strong>
-                                    {user.userFacebook || "Not provided"}
-                                </p>
-                            </div>
-                            <div className="user-profile-4">
-                                <p>
-                                    <strong>
-                                        Most Desired Collectible to Buy:{" "}
-                                    </strong>
-                                    {user.buyingCollectableInterested ||
-                                        "Not provided"}
-                                </p>
-                                <p>
-                                    <strong>
-                                        Most Desired Collectible to Sell:{" "}
-                                    </strong>
-                                    {user.sellingCollectableInterested ||
-                                        "Not provided"}
-                                </p>
+                            <div className="user-infos">
+                                <img src={`http://localhost:8080/images/${user.userImage}`} alt="User Avatar" />
+                                <div>
+                                    <div className="user-names">{user.username}</div>
+                                    <div className="rich-rows">
+                                        <div>
+                                            <img src={emailIcon} />
+                                            <span>Email: </span>
+                                            <div>{user.userEmail}</div>
+                                        </div>
+                                        <div>
+                                            <img src={phoneIcon} />
+                                            <span>Phone: </span>
+                                            <div>{user.userPhone || "Not provided"}</div>
+                                        </div>
+                                    </div>
+                                    <div className="rich-rows set-line">
+                                        <div>
+                                            <img src={facebookIcon} />
+                                            <span>Facebook: </span>
+                                            <div>{user.userFacebook || "Not provided"}</div>
+                                        </div>
+                                    </div>
+                                    <div className="rich-rows set-line">
+                                        <div>
+                                            <img src={buyIcon} />
+                                            <span>Most Desired Collectible to Buy:{" "}</span>
+                                            <div>
+                                            {user.buyingCollectableInterested
+                                            ? ("Collectable Set: " + user.buyingCollectableInterested.split("---")[0]
+                                                + ", Collectable Name: "
+                                                + user.buyingCollectableInterested.split("---")[1])
+                                            : "Not provided"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="rich-rows set-line">
+                                        <div>
+                                            <img src={saleIcon} />
+                                            <span>Most Desired Collectible to Sell:{" "}</span>
+                                            <div>
+                                            {user.sellingCollectableInterested
+                                                ? ("Collectable Set: " + user.sellingCollectableInterested.split("---")[0]
+                                                    + ", Collectable Name: "
+                                                    + user.sellingCollectableInterested.split("---")[1])
+                                                : "Not provided"}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </>
@@ -136,7 +160,10 @@ function UserProfilePage() {
                         </h2>
                         <div className="user-trade-history-card-container">
                             {tradeList.map((trade) => (
-                                <TradeHistoryCard trade={trade} />
+                                <TradeHistoryCard
+                                    key={trade.tradeId}
+                                    trade={trade}
+                                />
                             ))}
                         </div>
                     </>

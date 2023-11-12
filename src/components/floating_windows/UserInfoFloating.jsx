@@ -29,15 +29,23 @@ function UserInfoFloating({ userName, closeWindow }) {
             {user !== null ? (
                 <>
                     <h2>User Info</h2>
-                    <img src={user.userImage} alt="User Avatar" />
+                    <img src={`http://localhost:8080/images/${user.userImage}`} alt="User Avatar" />
                     <p>Username: {user.username}</p><p>Email: {user.userEmail}</p>
                     <p>Phone: {user.userPhone || "Not provided"}</p>
                     <p>Facebook: {user.userFacebook || "Not provided"}</p>
                     <p>
-                        Buying Collectable Interested: {user.buyingCollectableInterested || "Not provided"}
+                        I want to buy: {user.buyingCollectableInterested
+                            ? ("Collectable Set: " + user.buyingCollectableInterested.split("---")[0]
+                                + ", Collectable Name: "
+                                + user.buyingCollectableInterested.split("---")[1])
+                            : "Not provided"}
                     </p>
                     <p>
-                        Selling Collectable Interested: {user.sellingCollectableInterested || "Not provided"}
+                        I want to sell: {user.sellingCollectableInterested
+                            ? ("Collectable Set: " + user.sellingCollectableInterested.split("---")[0]
+                                + ", Collectable Name: "
+                                + user.sellingCollectableInterested.split("---")[1])
+                            : "Not provided"}
                     </p>
                     <button onClick={closeWindow}>Close</button>
                 </>) : (

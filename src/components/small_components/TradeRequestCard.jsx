@@ -29,7 +29,7 @@ function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
                         </h2>
                         <div className="request-image-container">
                             <img
-                                src="/assets/img/default-avatar.jpg"
+                                src={`http://localhost:8080/images/${trade.collectableImage}`}
                                 alt="item image"
                             ></img>
                         </div>
@@ -63,7 +63,7 @@ function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
                         </h2>
                         <div className="request-image-container">
                             <img
-                                src="/assets/img/default-avatar.jpg"
+                                src={`http://localhost:8080/images/${trade.collectableImage}`}
                                 alt="item image"
                             ></img>
                         </div>

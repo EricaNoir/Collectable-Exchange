@@ -25,7 +25,7 @@ function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
             <div className="my-collectable-card-1">
                 <div className="my-collectable-card-image-container">
                     <img
-                        src={`/api/images/${exchange.collectableImage}`}
+                        src={`http://localhost:8080/images/${exchange.collectableImage}`}
                         alt="item image"
                     ></img>
                 </div>
