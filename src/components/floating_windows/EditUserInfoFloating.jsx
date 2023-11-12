@@ -5,10 +5,18 @@ function EditUserInfoFloating({ user, closeWindow }) {
         userEmail: user.userEmail,
         userPhone: user.userPhone || "",
         userFacebook: user.userFacebook || "",
-        buyingCollectableInterestedSet: user.buyingCollectableInterested ? user.buyingCollectableInterested.split('---')[0] : "",
-        buyingCollectableInterestedName: user.buyingCollectableInterested ? user.buyingCollectableInterested.split('---')[1] : "",
-        sellingCollectableInterestedSet: user.sellingCollectableInterested ? user.sellingCollectableInterested.split('---')[0] : "",
-        sellingCollectableInterestedName: user.sellingCollectableInterested ? user.sellingCollectableInterested.split('---')[1] : "",
+        buyingCollectableInterestedSet: user.buyingCollectableInterested
+            ? user.buyingCollectableInterested.split("---")[0]
+            : "",
+        buyingCollectableInterestedName: user.buyingCollectableInterested
+            ? user.buyingCollectableInterested.split("---")[1]
+            : "",
+        sellingCollectableInterestedSet: user.sellingCollectableInterested
+            ? user.sellingCollectableInterested.split("---")[0]
+            : "",
+        sellingCollectableInterestedName: user.sellingCollectableInterested
+            ? user.sellingCollectableInterested.split("---")[1]
+            : "",
         userImage: null,
     });
     const [changed, setChanged] = React.useState(false);
@@ -63,14 +71,24 @@ function EditUserInfoFloating({ user, closeWindow }) {
         body.append("userEmail", editedUser.userEmail);
         body.append("userPhone", editedUser.userPhone);
         body.append("userFacebook", editedUser.userFacebook);
-        body.append("buyingCollectableInterested",
-            (editedUser.buyingCollectableInterestedSet && editedUser.buyingCollectableInterestedName)
-                ? editedUser.buyingCollectableInterestedSet + "---" + editedUser.buyingCollectableInterestedName
-                : null);
-        body.append("sellingCollectableInterested",
-            (editedUser.sellingCollectableInterestedSet && editedUser.sellingCollectableInterestedName)
-                ? editedUser.sellingCollectableInterestedSet + "---" + editedUser.sellingCollectableInterestedName
-                : null);
+        body.append(
+            "buyingCollectableInterested",
+            editedUser.buyingCollectableInterestedSet &&
+                editedUser.buyingCollectableInterestedName
+                ? editedUser.buyingCollectableInterestedSet +
+                      "---" +
+                      editedUser.buyingCollectableInterestedName
+                : null
+        );
+        body.append(
+            "sellingCollectableInterested",
+            editedUser.sellingCollectableInterestedSet &&
+                editedUser.sellingCollectableInterestedName
+                ? editedUser.sellingCollectableInterestedSet +
+                      "---" +
+                      editedUser.sellingCollectableInterestedName
+                : null
+        );
         body.append("userImage", editedUser.userImage);
 
         fetch(url, {
@@ -87,7 +105,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
     };
     return (
         <>
-
+            <div className="help-and-about-overlay" onClick={closeWindow}></div>
             <div className="floating-window">
                 {collectableCategory !== null ? (
                     <div className="floating-form-container">
@@ -108,89 +126,126 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                 <input
                                     type="tel"
                                     name="userPhone"
-                                    placeholder={editedUser.userPhone || "Not provided."}
+                                    placeholder={
+                                        editedUser.userPhone || "Not provided."
+                                    }
                                     value={editedUser.userPhone}
                                     onChange={handleInputChange}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="userFacebook">New Facebook:</label>
+                                <label htmlFor="userFacebook">
+                                    New Facebook:
+                                </label>
                                 <input
                                     type="text"
                                     name="userFacebook"
-                                    placeholder={editedUser.userFacebook || "Not provided."}
+                                    placeholder={
+                                        editedUser.userFacebook ||
+                                        "Not provided."
+                                    }
                                     value={editedUser.userFacebook}
                                     onChange={handleInputChange}
                                 />
                             </div>
                             <div>
-                                <label htmlFor="buyingCollectableInterestedSet">Set want to buy:</label>
+                                <label htmlFor="buyingCollectableInterestedSet">
+                                    Set want to buy:
+                                </label>
                                 <select
                                     name="buyingCollectableInterestedSet"
                                     onChange={handleInputChange}
-                                    value={editedUser.buyingCollectableInterestedSet}
+                                    value={
+                                        editedUser.buyingCollectableInterestedSet
+                                    }
                                 >
                                     <option value="" disabled>
                                         Select a set
                                     </option>
-                                    {Object.keys(collectableCategory).map((set) => (
-                                        <option key={set}>{set}</option>
-                                    ))}
+                                    {Object.keys(collectableCategory).map(
+                                        (set) => (
+                                            <option key={set}>{set}</option>
+                                        )
+                                    )}
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="buyingCollectableInterestedName">In this set, card want to buy:</label>
                                 {editedUser.buyingCollectableInterestedSet && (
-                                    <select
-                                        name="buyingCollectableInterestedName"
-                                        onChange={handleInputChange}
-                                        value={editedUser.buyingCollectableInterestedName}
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select an item
-                                        </option>
-                                        {collectableCategory[editedUser.buyingCollectableInterestedSet].map(
-                                            (name) => (
-                                                <option key={name}>{name}</option>
-                                            )
-                                        )}
-                                    </select>
+                                    <>
+                                        <label htmlFor="buyingCollectableInterestedName">
+                                            In this set, card want to buy:
+                                        </label>
+                                        <select
+                                            name="buyingCollectableInterestedName"
+                                            onChange={handleInputChange}
+                                            value={
+                                                editedUser.buyingCollectableInterestedName
+                                            }
+                                            required
+                                        >
+                                            <option value="" disabled>
+                                                Select an item
+                                            </option>
+                                            {collectableCategory[
+                                                editedUser
+                                                    .buyingCollectableInterestedSet
+                                            ].map((name) => (
+                                                <option key={name}>
+                                                    {name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
                                 )}
                             </div>
                             <div>
-                                <label htmlFor="sellingCollectableInterestedSet">Set want to sell:</label>
+                                <label htmlFor="sellingCollectableInterestedSet">
+                                    Set want to sell:
+                                </label>
                                 <select
                                     name="sellingCollectableInterestedSet"
                                     onChange={handleInputChange}
-                                    value={editedUser.sellingCollectableInterestedSet}
+                                    value={
+                                        editedUser.sellingCollectableInterestedSet
+                                    }
                                 >
                                     <option value="" disabled>
                                         Select a set
                                     </option>
-                                    {Object.keys(collectableCategory).map((set) => (
-                                        <option key={set}>{set}</option>
-                                    ))}
+                                    {Object.keys(collectableCategory).map(
+                                        (set) => (
+                                            <option key={set}>{set}</option>
+                                        )
+                                    )}
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="sellingCollectableInterestedName">In this set, card want to sell:</label>
                                 {editedUser.sellingCollectableInterestedSet && (
-                                    <select
-                                        name="sellingCollectableInterestedName"
-                                        onChange={handleInputChange}
-                                        value={editedUser.sellingCollectableInterestedName}
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select an item
-                                        </option>
-                                        {collectableCategory[editedUser.sellingCollectableInterestedSet].map(
-                                            (name) => (
-                                                <option key={name}>{name}</option>
-                                            )
-                                        )}
-                                    </select>
+                                    <>
+                                        <label htmlFor="sellingCollectableInterestedName">
+                                            In this set, card want to sell:
+                                        </label>
+                                        <select
+                                            name="sellingCollectableInterestedName"
+                                            onChange={handleInputChange}
+                                            value={
+                                                editedUser.sellingCollectableInterestedName
+                                            }
+                                            required
+                                        >
+                                            <option value="" disabled>
+                                                Select an item
+                                            </option>
+                                            {collectableCategory[
+                                                editedUser
+                                                    .sellingCollectableInterestedSet
+                                            ].map((name) => (
+                                                <option key={name}>
+                                                    {name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
                                 )}
                             </div>
                             <div>
@@ -203,8 +258,9 @@ function EditUserInfoFloating({ user, closeWindow }) {
                                     onChange={handleFileChange}
                                 />
                             </div>
-                            <button type="submit" disabled={!changed}>Submit</button>
-                            <button onClick={closeWindow}>Close</button>
+                            <button type="submit" disabled={!changed}>
+                                Submit
+                            </button>
                         </form>
                     </div>
                 ) : (

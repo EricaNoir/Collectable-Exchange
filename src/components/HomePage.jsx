@@ -6,7 +6,7 @@ import UserInfoFloating from "./floating_windows/UserInfoFloating";
 import EditCollectableFloating from "./floating_windows/EditCollectableFloating";
 import CreateCollectableFloating from "./floating_windows/CreateCollectableFloating";
 import { useParams } from "react-router-dom";
-import "../css/homePage.css";
+import "../css/homePage.scss";
 
 function HomePage() {
     const { userName } = useParams();
@@ -246,9 +246,8 @@ function HomePage() {
     React.useEffect(() => {
         fetch("/api/currentAuthorisedCollectable")
             .then((response) => {
-                if (!response.ok) {
+                if (!response.ok)
                     throw new Error("Network response was not ok");
-                }
                 return response.json();
             })
             .then((collectableCategoryData) => {
@@ -264,6 +263,59 @@ function HomePage() {
     React.useEffect(() => {
         cardContainerRef.current.scrollTop = 0;
     }, [page]);
+
+    // Render post
+    const [post, setPost] = React.useState(null);
+    // Fetch post
+    React.useEffect(() => {
+        const intervalId = setInterval(() => {
+            fetch("/api/post")
+                .then((response) => {
+                    if (!response.ok)
+                        throw new Error("Network response was not ok");
+                    return response.json();
+                })
+                .then((post) => {
+                    setPost(post);
+                })
+                .catch((error) => {
+                    console.error("Fetch error:", error);
+                });
+        }, 5000);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // Close the ad
+    const [isAdShow, setIsAdShow] = React.useState(true);
+    function closeAd() {
+        setIsAdShow(false);
+    }
+
+    // Handle feedback
+    const [userFeedBack, setUserFeedBack] = React.useState("");
+    const handleInputChange = (event) => {
+        setUserFeedBack(event.target.value);
+    };
+
+    const handleFeedbackSubmit = (event) => {
+        event.preventDefault();
+
+        const url = "/api/feedback";
+        const body = new FormData();
+
+        body.append("feedback", userFeedBack);
+
+        fetch(url, {
+            method: "POST",
+            body: body,
+        })
+            .then((response) => response.text())
+            .then((data) => {
+                alert(data);
+                setUserFeedBack("");
+            })
+    };
 
     return (
         <>
@@ -289,7 +341,52 @@ function HomePage() {
                     exchange={activeWindow.targetObject}
                 />
             )}
-
+            <div className="post-container">
+                <h2>POST</h2>
+                <p className="post-message">
+                    {post ? post.message : "No post now"}
+                </p>
+                <p className="post-footer">
+                    {post &&
+                        `From ${post.creater} at ${new Date(post.updateDate)
+                            .getHours()
+                            .toString()
+                            .padStart(2, "0")}:${new Date(post.updateDate)
+                            .getMinutes()
+                            .toString()
+                            .padStart(2, "0")} ${new Date(
+                            post.updateDate
+                        ).getDate()}/${(
+                            new Date(post.updateDate).getMonth() + 1
+                        )
+                            .toString()
+                            .padStart(2, "0")}/${new Date(
+                            post.updateDate
+                        ).getFullYear()}`}
+                </p>
+            </div>
+            {isAdShow && (
+                <div className="ad-container">
+                    <img
+                        src="http://localhost:8080/images/ad.png"
+                        alt="ad"
+                    ></img>
+                    <button onClick={closeAd}>Close Ad</button>
+                </div>
+            )}
+            <div className="feedback-container">
+                <h3>Feedback to us</h3>
+                <form onSubmit={handleFeedbackSubmit}>
+                    <textarea
+                        name="feedback"
+                        value={userFeedBack}
+                        onChange={handleInputChange}
+                        placeholder="Enter your feedback here..."
+                        required
+                    ></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
             <section className="body-container">
                 <nav className="nav-in-home-page">
                     <button
@@ -432,11 +529,6 @@ function HomePage() {
                                 <div>Loading...</div>
                             )}
                         </div>
-                        {/* <div className="page-bar">
-                            <button className="change-page-btn" onClick={prePage}>Previous Page</button>
-                            Current Page: {page}
-                            <button className="change-page-btn" onClick={nextPage}>Next Page</button>
-                        </div> */}
                         <h3>Avaliable Exchanges</h3>
                         <div
                             className="card-container"
@@ -488,15 +580,17 @@ function HomePage() {
                             >
                                 +
                             </button>
-                            {(myList !== null && myList.length > 0) ? (myList.map((exchange) => (
-                                <MyCollectableCard
-                                    key={exchange.exchangeId}
-                                    exchange={exchange}
-                                    onEditClick={handleEditClick}
-                                    onToggleClick={handleToggleClick}
-                                />
-                            ))) : myList !== null ? (
-                                <div className="empty-list">The list is empty.</div>
+                            {myList !== null && myList.length > 0 ? (
+                                myList.map((exchange) => (
+                                    <MyCollectableCard
+                                        key={exchange.exchangeId}
+                                        exchange={exchange}
+                                        onEditClick={handleEditClick}
+                                        onToggleClick={handleToggleClick}
+                                    />
+                                ))
+                            ) : myList !== null ? (
+                                <p className="empty-list">The list is empty.</p>
                             ) : (
                                 <div>Loading...</div>
                             )}

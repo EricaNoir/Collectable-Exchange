@@ -13,7 +13,7 @@ function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
-        if (file.size > 1024*1024) {
+        if (file.size > 1024 * 1024) {
             alert("Maximum image size: 1MB!");
             event.target.value = "";
             return;
@@ -59,106 +59,114 @@ function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
     };
 
     return (
-        <div className="floating-window">
-            <div className="floating-form-container">
-                <h1>Create a collectable trade</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="collectableSet">Item Set:</label>
-                        <select
-                            name="collectableSet"
-                            onChange={handleInputChange}
-                            value={createdItem.collectableSet}
-                            required
-                        >
-                            <option value="" disabled>
-                                Select a set
-                            </option>
-                            {Object.keys(nameList).map((set) => (
-                                <option key={set}>{set}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="collectableName">Item Name:</label>
-                        {createdItem.collectableSet && (
+        <>
+            <div className="help-and-about-overlay" onClick={closeWindow}></div>
+            <div className="floating-window">
+                <div className="floating-form-container">
+                    <h1>Create a collectable trade</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor="collectableSet">Item Set:</label>
                             <select
-                                name="collectableName"
+                                name="collectableSet"
                                 onChange={handleInputChange}
-                                value={createdItem.collectableName}
+                                value={createdItem.collectableSet}
                                 required
                             >
                                 <option value="" disabled>
-                                    Select an item
+                                    Select a set
                                 </option>
-                                {nameList[createdItem.collectableSet].map(
-                                    (name) => (
-                                        <option key={name}>{name}</option>
-                                    )
-                                )}
+                                {Object.keys(nameList).map((set) => (
+                                    <option key={set}>{set}</option>
+                                ))}
                             </select>
-                        )}
-                    </div>
-                    <div>
-                        <label htmlFor="price">Item Price:</label>
-                        <input
-                            type="number"
-                            name="price"
-                            placeholder="Please enter the price"
-                            value={createdItem.price}
-                            onChange={handleInputChange}
-                            required
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="sellingOrBuying">Trade Type:</label>
-                        <select
-                            name="sellingOrBuying"
-                            onChange={handleInputChange}
-                            value={createdItem.sellingOrBuying}
-                            required
-                        >
-                            <option value="" disabled>
-                                Select a type
-                            </option>
-                            <option>SELLING</option>
-                            <option>BUYING</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="priority">
-                            Trade Priority: (3 is the highest)
-                        </label>
-                        <select
-                            name="priority"
-                            onChange={handleInputChange}
-                            value={createdItem.priority}
-                            required
-                        >
-                            <option value="" disabled>
-                                Select a priority
-                            </option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label htmlFor="collectableImage">Item Image: </label>
-                        <input
-                            type="file"
-                            name="collectableImage"
-                            id="collectableImage"
-                            accept="image/*"
-                            onChange={handleFileChange}
-                            required
-                        />
-                    </div>
-                    <button type="submit">Submit</button>
-                    <button onClick={closeWindow}>Close</button>
-                </form>
+                        </div>
+                        <div>
+                            {createdItem.collectableSet && (
+                                <>
+                                    <label htmlFor="collectableName">
+                                        Item Name:
+                                    </label>
+                                    <select
+                                        name="collectableName"
+                                        onChange={handleInputChange}
+                                        value={createdItem.collectableName}
+                                        required
+                                    >
+                                        <option value="" disabled>
+                                            Select an item
+                                        </option>
+                                        {nameList[
+                                            createdItem.collectableSet
+                                        ].map((name) => (
+                                            <option key={name}>{name}</option>
+                                        ))}
+                                    </select>
+                                </>
+                            )}
+                        </div>
+                        <div>
+                            <label htmlFor="price">Item Price:</label>
+                            <input
+                                type="number"
+                                name="price"
+                                placeholder="Please enter the price"
+                                value={createdItem.price}
+                                onChange={handleInputChange}
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="sellingOrBuying">Trade Type:</label>
+                            <select
+                                name="sellingOrBuying"
+                                onChange={handleInputChange}
+                                value={createdItem.sellingOrBuying}
+                                required
+                            >
+                                <option value="" disabled>
+                                    Select a type
+                                </option>
+                                <option>SELLING</option>
+                                <option>BUYING</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="priority">
+                                Trade Priority: (3 is the highest)
+                            </label>
+                            <select
+                                name="priority"
+                                onChange={handleInputChange}
+                                value={createdItem.priority}
+                                required
+                            >
+                                <option value="" disabled>
+                                    Select a priority
+                                </option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label htmlFor="collectableImage">
+                                Item Image:{" "}
+                            </label>
+                            <input
+                                type="file"
+                                name="collectableImage"
+                                id="collectableImage"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                required
+                            />
+                        </div>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

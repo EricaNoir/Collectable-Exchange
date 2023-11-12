@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "./small_components/Navbar";
 import EditUserInfoFloating from "./floating_windows/EditUserInfoFloating";
-import "../css/userProfilePage.css";
-import TradeHistoryCard from "./small_components/TradeHistoryCard"
+import "../css/userProfilePage.scss";
+import TradeHistoryCard from "./small_components/TradeHistoryCard";
 // icon
-import editIcon from '../static/edit.png'
-import emailIcon from '../static/email.png'
-import phoneIcon from '../static/phone.png'
-import facebookIcon from '../static/facebook.png'
-import buyIcon from '../static/buy.png'
-import saleIcon from '../static/sale.png'
+import editIcon from "../static/edit.png";
+import emailIcon from "../static/email.png";
+import phoneIcon from "../static/phone.png";
+import facebookIcon from "../static/facebook.png";
+import buyIcon from "../static/buy.png";
+import saleIcon from "../static/sale.png";
+import copyIcon from "../static/copy.png";
 
 function UserProfilePage() {
     const { userName } = useParams();
@@ -69,6 +70,11 @@ function UserProfilePage() {
             });
     });
 
+    function copyInfo(info) {
+        navigator.clipboard.writeText(info);
+        alert(`Copied "${info}" to your clipboard.`);
+    }
+
     return (
         <>
             <Navbar userName={userName} />
@@ -86,6 +92,7 @@ function UserProfilePage() {
                         <div className="user-info-container">
                             <div className="user-profile-2">
                                 <h1>User Profile</h1>
+                                <button className="log-out-btn" onClick={() => window.location.href = `/`}>Log out</button>
                             </div>
                             <div className="user-profile-1">
                                 <h2>Welcome</h2>
@@ -98,51 +105,112 @@ function UserProfilePage() {
                                 </button>
                             </div>
                             <div className="user-infos">
-                                <img src={`http://localhost:8080/images/${user.userImage}`} alt="User Avatar" />
+                                <img
+                                    src={`http://localhost:8080/images/${user.userImage}`}
+                                    alt="User Avatar"
+                                />
                                 <div>
-                                    <div className="user-names">{user.username}</div>
+                                    <div className="user-names">
+                                        {user.username}
+                                    </div>
                                     <div className="rich-rows">
                                         <div>
                                             <img src={emailIcon} />
                                             <span>Email: </span>
-                                            <div>{user.userEmail}</div>
+                                            <div>
+                                                <a
+                                                    href={`mailto:${user.userEmail}`}
+                                                    target="_top"
+                                                >
+                                                    {user.userEmail}
+                                                </a>
+                                            </div>
                                         </div>
                                         <div>
                                             <img src={phoneIcon} />
                                             <span>Phone: </span>
-                                            <div>{user.userPhone || "Not provided"}</div>
+                                            <div>
+                                                {user.userPhone ||
+                                                    "Not provided"}
+                                            </div>
+                                            {user.userPhone && (
+                                                <img
+                                                    src={copyIcon}
+                                                    style={{
+                                                        marginLeft: "24px",
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={() =>
+                                                        copyInfo(user.userPhone)
+                                                    }
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                     <div className="rich-rows set-line">
                                         <div>
                                             <img src={facebookIcon} />
                                             <span>Facebook: </span>
-                                            <div>{user.userFacebook || "Not provided"}</div>
+                                            <div>
+                                                {user.userFacebook ||
+                                                    "Not provided"}
+                                            </div>
+                                            {user.userFacebook && (
+                                                <img
+                                                    src={copyIcon}
+                                                    style={{
+                                                        marginLeft: "24px",
+                                                        cursor: "pointer",
+                                                    }}
+                                                    onClick={() =>
+                                                        copyInfo(
+                                                            user.userFacebook
+                                                        )
+                                                    }
+                                                />
+                                            )}
                                         </div>
                                     </div>
                                     <div className="rich-rows set-line">
                                         <div>
                                             <img src={buyIcon} />
-                                            <span>Most Desired Collectible to Buy:{" "}</span>
+                                            <span>
+                                                Most Desired Collectible to Buy:{" "}
+                                            </span>
                                             <div>
-                                            {user.buyingCollectableInterested
-                                            ? ("Collectable Set: " + user.buyingCollectableInterested.split("---")[0]
-                                                + ", Collectable Name: "
-                                                + user.buyingCollectableInterested.split("---")[1])
-                                            : "Not provided"}
+                                                {user.buyingCollectableInterested
+                                                    ? `${
+                                                          user.buyingCollectableInterested.split(
+                                                              "---"
+                                                          )[1]
+                                                      } from ${
+                                                          user.buyingCollectableInterested.split(
+                                                              "---"
+                                                          )[0]
+                                                      }`
+                                                    : "Not provided"}
                                             </div>
                                         </div>
                                     </div>
                                     <div className="rich-rows set-line">
                                         <div>
                                             <img src={saleIcon} />
-                                            <span>Most Desired Collectible to Sell:{" "}</span>
+                                            <span>
+                                                Most Desired Collectible to
+                                                Sell:
+                                            </span>
                                             <div>
-                                            {user.sellingCollectableInterested
-                                                ? ("Collectable Set: " + user.sellingCollectableInterested.split("---")[0]
-                                                    + ", Collectable Name: "
-                                                    + user.sellingCollectableInterested.split("---")[1])
-                                                : "Not provided"}
+                                                {user.sellingCollectableInterested
+                                                    ? `${
+                                                          user.sellingCollectableInterested.split(
+                                                              "---"
+                                                          )[1]
+                                                      } from ${
+                                                          user.sellingCollectableInterested.split(
+                                                              "---"
+                                                          )[0]
+                                                      }`
+                                                    : "Not provided"}
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +236,7 @@ function UserProfilePage() {
                         </div>
                     </>
                 ) : tradeList ? (
-                    <div>No trade history.</div>
+                    <h2 className="user-trade-history-text">No trade history.</h2>
                 ) : (
                     <div>Loading...</div>
                 )}

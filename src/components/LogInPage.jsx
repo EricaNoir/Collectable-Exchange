@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "../css/logInPage.css"
+import "../css/logInPage.scss"
 
 function LogInPage() {
     const [formData, setFormData] = React.useState({

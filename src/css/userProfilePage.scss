@@ -8,6 +8,18 @@
 
 .user-profile-2 {
     height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+
+    button{
+        background-color: gray;
+        color: white;
+    }
+    button:hover {
+        background-color: #b9b9b9;
+        color: black;
+    }
 }
 
 .user-profile-2 img {
@@ -129,10 +141,6 @@
     margin-bottom: 20px;
 }
 
-.floating-form-container form {
-    display: grid;
-    gap: 20px;
-}
 
 .floating-form-container label {
     display: block;
@@ -246,7 +254,4 @@
 .body-container {
     /* background-color: rgb(241, 241, 241) !important; */
     /* box-shadow: 0 0 10px #dcdcdc; */
-}
-#root {
-    background-color: #e8fdf9;
 }

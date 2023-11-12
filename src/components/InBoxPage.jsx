@@ -2,7 +2,7 @@ import Navbar from "./small_components/Navbar";
 import React from "react";
 import TradeRequestCard from "./small_components/TradeRequestCard";
 import { useParams } from "react-router-dom";
-import "../css/inBoxPage.css";
+import "../css/inBoxPage.scss";
 
 function InBoxPage({}) {
     const { userName } = useParams();
@@ -24,7 +24,7 @@ function InBoxPage({}) {
             .catch((error) => {
                 console.error("Fetch error:", error);
             });
-    }, [myTrade]);
+    }, []);
 
     function handleConfirmClick(exchangeId) {
         fetch(`/api/myTrade/confirm?exchangeId=${exchangeId}`)

@@ -1,5 +1,10 @@
 // Other user's info
-
+import emailIcon from "../../static/email.png";
+import phoneIcon from "../../static/phone.png";
+import facebookIcon from "../../static/facebook.png";
+import buyIcon from "../../static/buy.png";
+import saleIcon from "../../static/sale.png";
+import copyIcon from "../../static/copy.png";
 import React from "react";
 
 function UserInfoFloating({ userName, closeWindow }) {
@@ -22,37 +27,132 @@ function UserInfoFloating({ userName, closeWindow }) {
         fetchUserData();
     }, [userName]);
 
-    return (
-        <div
-            className="floating-window"
-        >
-            {user !== null ? (
-                <>
-                    <h2>User Info</h2>
-                    <img src={`http://localhost:8080/images/${user.userImage}`} alt="User Avatar" />
-                    <p>Username: {user.username}</p><p>Email: {user.userEmail}</p>
-                    <p>Phone: {user.userPhone || "Not provided"}</p>
-                    <p>Facebook: {user.userFacebook || "Not provided"}</p>
-                    <p>
-                        I want to buy: {user.buyingCollectableInterested
-                            ? ("Collectable Set: " + user.buyingCollectableInterested.split("---")[0]
-                                + ", Collectable Name: "
-                                + user.buyingCollectableInterested.split("---")[1])
-                            : "Not provided"}
-                    </p>
-                    <p>
-                        I want to sell: {user.sellingCollectableInterested
-                            ? ("Collectable Set: " + user.sellingCollectableInterested.split("---")[0]
-                                + ", Collectable Name: "
-                                + user.sellingCollectableInterested.split("---")[1])
-                            : "Not provided"}
-                    </p>
-                    <button onClick={closeWindow}>Close</button>
-                </>) : (
-                <div>Loading...</div>
-            )}
+    function copyInfo(info) {
+        navigator.clipboard.writeText(info);
+        alert(`Copied "${info}" to your clipboard.`);
+    }
 
-        </div>
+    return (
+        <>
+            <div className="help-and-about-overlay" onClick={closeWindow}></div>
+            <div className="floating-window">
+                {user ? (
+                    <>
+                        <div className="user-infos">
+                            <img
+                                src={`http://localhost:8080/images/${user.userImage}`}
+                                alt="User Avatar"
+                            />
+                            <div>
+                                <div className="user-names">
+                                    {user.username}
+                                </div>
+                                <div className="rich-rows">
+                                    <div>
+                                        <img src={emailIcon} />
+                                        <span>Email: </span>
+                                        <div>
+                                            <a
+                                                href={`mailto:${user.userEmail}`}
+                                                target="_top"
+                                            >
+                                                {user.userEmail}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <img src={phoneIcon} />
+                                        <span>Phone: </span>
+                                        <div>
+                                            {user.userPhone || "Not provided"}
+                                        </div>
+                                        {user.userPhone && (
+                                            <img
+                                                src={copyIcon}
+                                                style={{
+                                                    marginLeft: "24px",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() =>
+                                                    copyInfo(user.userPhone)
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="rich-rows set-line">
+                                    <div>
+                                        <img src={facebookIcon} />
+                                        <span>Facebook: </span>
+                                        <div>
+                                            {user.userFacebook ||
+                                                "Not provided"}
+                                        </div>
+                                        {user.userFacebook && (
+                                            <img
+                                                src={copyIcon}
+                                                style={{
+                                                    marginLeft: "24px",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() =>
+                                                    copyInfo(user.userFacebook)
+                                                }
+                                            />
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="rich-rows set-line">
+                                    <div>
+                                        <img src={buyIcon} />
+                                        <span>
+                                            Most Desired Collectible to Buy:{" "}
+                                        </span>
+                                        <div>
+                                            {user.buyingCollectableInterested
+                                                ? `${
+                                                      user.buyingCollectableInterested.split(
+                                                          "---"
+                                                      )[1]
+                                                  } from ${
+                                                      user.buyingCollectableInterested.split(
+                                                          "---"
+                                                      )[0]
+                                                  }`
+                                                : "Not provided"}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="rich-rows set-line">
+                                    <div>
+                                        <img src={saleIcon} />
+                                        <span>
+                                            Most Desired Collectible to Sell:
+                                        </span>
+                                        <div>
+                                            {user.sellingCollectableInterested
+                                                ? `${
+                                                      user.sellingCollectableInterested.split(
+                                                          "---"
+                                                      )[1]
+                                                  } from ${
+                                                      user.sellingCollectableInterested.split(
+                                                          "---"
+                                                      )[0]
+                                                  }`
+                                                : "Not provided"}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </>
+                ) : (
+                    <div>Loading...</div>
+                )}
+            </div>
+        </>
     );
 }
 
