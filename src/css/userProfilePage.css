@@ -29,9 +29,62 @@
     padding-bottom: 10px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    /* justify-content: space-between; */
 }
-
+.user-profile-2>div {
+    display: flex;
+    align-items: flex-end;
+}
+.user-infos {
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px 0;
+}
+.user-infos>img {
+    width: 200px;
+    flex-shrink: 0;
+    height: 200px;
+    margin-right: 40px;
+    border-radius: 10px;
+}
+.user-infos>div {
+    flex: 1;
+}
+.user-infos .user-names {
+    font-size: 28px;
+    color: #000;
+    margin-bottom: 16px;
+    font-weight: 500;
+}
+.rich-rows {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+}
+.rich-rows>div {
+    width: 45%;
+    display: flex;
+    align-items: center;
+}
+.set-line>div {
+    width: 100% !important;
+}
+.rich-rows>div>img {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+}
+.rich-rows>div>span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+.rich-rows>div>div {
+    color: #000;
+    margin-left: 10px;
+    font-size: 16px;
+}
 .profile-edit-btn {
     background-color: #007bff;
     color: #fff;
@@ -41,6 +94,13 @@
     cursor: pointer;
     transition: background-color 0.3s;
     height: 40px;
+    display: flex;
+    align-items: center;
+}
+.profile-edit-btn>img {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
 }
 
 .profile-edit-btn:hover {
@@ -126,12 +186,32 @@
 .trade-history-card {
     display: flex;
     height: 112px;
-    background-color: rgb(236, 236, 236);
-    border-radius: 24px;
+    /* background-color: rgb(236, 236, 236); */
+    /* border-radius: 24px; */
     padding: 16px 24px;
-    justify-content: space-between;
     margin: 20px;
+    border-bottom: 1px solid #e6e5e5;
 }
+.trade-history-card>img {
+    height: 100%;
+    width: 200px;
+    margin-right: 40px;
+    border-radius: 10px;
+}
+.card-box {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.card-box>div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+.card-box>div>span {
+    margin-right: 10px;
+}
+
 
 .trade-history-card p {
     margin: 6px;
@@ -162,4 +242,11 @@
     flex-direction: column;
     justify-content: flex-end;
 
+}
+.body-container {
+    /* background-color: rgb(241, 241, 241) !important; */
+    /* box-shadow: 0 0 10px #dcdcdc; */
+}
+#root {
+    background-color: #e8fdf9;
 }

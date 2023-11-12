@@ -17,7 +17,7 @@ function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
             <div className="exchange-card-1">
                 <div className="card-image-container">
                     <img
-                        src={`/api/images/${exchange.collectableImage}`}
+                        src={`http://localhost:8080/images/${exchange.collectableImage}`}
                         alt="item image"
                     ></img>
                 </div>

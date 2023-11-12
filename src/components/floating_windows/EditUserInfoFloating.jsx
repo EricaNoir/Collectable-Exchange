@@ -66,11 +66,11 @@ function EditUserInfoFloating({ user, closeWindow }) {
         body.append("buyingCollectableInterested",
             (editedUser.buyingCollectableInterestedSet && editedUser.buyingCollectableInterestedName)
                 ? editedUser.buyingCollectableInterestedSet + "---" + editedUser.buyingCollectableInterestedName
-                : "");
+                : null);
         body.append("sellingCollectableInterested",
             (editedUser.sellingCollectableInterestedSet && editedUser.sellingCollectableInterestedName)
                 ? editedUser.sellingCollectableInterestedSet + "---" + editedUser.sellingCollectableInterestedName
-                : "");
+                : null);
         body.append("userImage", editedUser.userImage);
 
         fetch(url, {

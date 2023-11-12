@@ -6,8 +6,9 @@ function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
         collectableSet: "",
         price: "",
         sellingOrBuying: "",
-        collectableImage: "",
+        collectableImage: null,
         priority: "",
+        visibility: true,
     });
 
     const handleFileChange = (event) => {

@@ -29,7 +29,7 @@ function UserInfoFloating({ userName, closeWindow }) {
             {user !== null ? (
                 <>
                     <h2>User Info</h2>
-                    <img src={`/api/images/${user.userImage}`} alt="User Avatar" />
+                    <img src={`http://localhost:8080/images/${user.userImage}`} alt="User Avatar" />
                     <p>Username: {user.username}</p><p>Email: {user.userEmail}</p>
                     <p>Phone: {user.userPhone || "Not provided"}</p>
                     <p>Facebook: {user.userFacebook || "Not provided"}</p>
