@@ -4,7 +4,6 @@ import emailIcon from "../../static/email.png";
 import phoneIcon from "../../static/phone.png";
 import facebookIcon from "../../static/facebook.png";
 import copyIcon from "../../static/copy.png";
-import React from "react";
 
 function ManageUserButton() {
     // search user, delete/authorize
