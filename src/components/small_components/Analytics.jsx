@@ -28,6 +28,8 @@ function Analytics() {
                     },
                 ]}
                 layout={{
+                    paper_bgcolor: "rgba(0,0,0,0)",
+                    plot_bgcolor: "rgba(0,0,0,0)",
                     autosize: true,
                     title: {
                         text: title,

@@ -11,15 +11,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: #f1f1f1;
+            background-color: #ffffff;
             margin: 0px 20px 20px 0px;
+            box-shadow: 4px 6px 16px rgba(0, 0, 0, 0.3);
             img {
                 height: 48px;
             }
         }
         .admin-button:hover {
-            
-            background-color: #bdbdbd;
+            background-color: #dbdbdb;
         }
         h2 {
             width: 60%;

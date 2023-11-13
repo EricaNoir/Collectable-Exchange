@@ -63,11 +63,11 @@ function CreateCampaignButton() {
                             />
                         </div>
                         <div>
-                            <label htmlFor="names">Name List (each name splits by a ', '): </label>
+                            <label htmlFor="names">Name List (each name splits by <strong>a comma and a space: ", "</strong>): </label>
                             <input
                                 type="text"
                                 name="names"
-                                placeholder="Names, split each name by ', '"
+                                placeholder='Names, split each name by ", "'
                                 value={campaign.names}
                                 onChange={handleInputChange}
                             />

@@ -48,7 +48,7 @@ function MAFeedbackPage() {
         <>
             <MANavbar />
 
-            <section className="body-container">
+            <section className="body-container" id="feedback-section">
                 <h1>User Feedback</h1>
                 {feedbacks !== null && feedbacks.length > 0 ? (
                     <div className="feedback-card-container">

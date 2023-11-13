@@ -1,0 +1,40 @@
+#feedback-section {
+    overflow-y: scroll;
+    height: calc(100vh - 80px);
+    width: 50%;
+    .feedback-card {
+        margin-bottom: 10px;
+        border-top: 2px solid gray;
+        border-bottom: 1px solid gray;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .feedback-content {
+            width: 100%;
+            .feedback-header {
+                display: flex;
+                justify-content: space-between;
+                h3 {
+                    margin: 4px 0px;
+                }
+            }
+            p {
+                background-color: rgb(255, 255, 255);
+                margin: 10px 0px;
+                padding: 10px;
+                border-radius: 8px;
+            }
+        }
+
+        button {
+            margin: 10px 0px 10px 24px;
+            align-items: flex-end;
+            width: 200px;
+            background-color: rgb(235, 231, 178);
+        }
+        button:hover {
+            background-color: rgb(247, 244, 204);
+        }
+    }
+}
