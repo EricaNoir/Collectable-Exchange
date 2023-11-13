@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: end;
 
-    button{
+    button {
         background-color: gray;
         color: white;
     }
@@ -44,7 +44,7 @@
     align-items: center;
     /* justify-content: space-between; */
 }
-.user-profile-2>div {
+.user-profile-2 > div {
     display: flex;
     align-items: flex-end;
 }
@@ -53,14 +53,14 @@
     box-sizing: border-box;
     padding: 20px 0;
 }
-.user-infos>img {
+.user-infos > img {
     width: 200px;
     flex-shrink: 0;
     height: 200px;
     margin-right: 40px;
     border-radius: 10px;
 }
-.user-infos>div {
+.user-infos > div {
     flex: 1;
 }
 .user-infos .user-names {
@@ -74,31 +74,31 @@
     align-items: center;
     margin-bottom: 14px;
 }
-.rich-rows>div {
+.rich-rows > div {
     width: 45%;
     display: flex;
     align-items: center;
 }
-.set-line>div {
+.set-line > div {
     width: 100% !important;
 }
-.rich-rows>div>img {
+.rich-rows > div > img {
     width: 18px;
     height: 18px;
     margin-right: 6px;
 }
-.rich-rows>div>span {
+.rich-rows > div > span {
     font-size: 16px;
     font-weight: 500;
     color: #333;
 }
-.rich-rows>div>div {
+.rich-rows > div > div {
     color: #000;
     margin-left: 10px;
     font-size: 16px;
 }
 .profile-edit-btn {
-    background-color: #007bff;
+    background-color: #4caf50;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -109,14 +109,14 @@
     display: flex;
     align-items: center;
 }
-.profile-edit-btn>img {
+.profile-edit-btn > img {
     width: 15px;
     height: 15px;
     margin-right: 5px;
 }
 
 .profile-edit-btn:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
 /* EditUserInfoFloating */
@@ -141,7 +141,6 @@
     margin-bottom: 20px;
 }
 
-
 .floating-form-container label {
     display: block;
     margin-bottom: 5px;
@@ -163,12 +162,12 @@
 }
 
 .floating-form-container button[type="submit"] {
-    background-color: #007bff;
+    background-color: #4caf50;
     color: #fff;
 }
 
 .floating-form-container button[type="submit"]:hover {
-    background-color: #0056b3;
+    background-color: #45a049;
 }
 
 .floating-form-container button:not([type="submit"]) {
@@ -200,7 +199,7 @@
     margin: 20px;
     border-bottom: 1px solid #e6e5e5;
 }
-.trade-history-card>img {
+.trade-history-card > img {
     height: 100%;
     width: 200px;
     margin-right: 40px;
@@ -211,15 +210,14 @@
     flex-wrap: wrap;
     align-items: center;
 }
-.card-box>div {
+.card-box > div {
     width: 50%;
     display: flex;
     align-items: center;
 }
-.card-box>div>span {
+.card-box > div > span {
     margin-right: 10px;
 }
-
 
 .trade-history-card p {
     margin: 6px;
@@ -229,29 +227,23 @@
 .trade-history-image-div {
     margin: 5px;
     height: 72px;
+    img {
+        height: 100%;
+        border-radius: 8px;
+    }
 }
-.trade-history-image-div img {
-    height: 100%;
-    border-radius: 8px;
-}
-
 .trade-history-card-1 {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-
-}.trade-history-card-2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
-}.trade-history-card-3 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-
 }
-.body-container {
-    /* background-color: rgb(241, 241, 241) !important; */
-    /* box-shadow: 0 0 10px #dcdcdc; */
+.trade-history-card-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.trade-history-card-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
