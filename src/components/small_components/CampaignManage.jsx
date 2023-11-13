@@ -17,15 +17,18 @@ function CampaignManage() {
     }, []);
 
     function deleteCollectable(exchangeId) {
-        const url = `/api/manage/deleteCollectable?collectableId=${exchangeId}`;
-        fetch(url)
-            .then((response) => response.text())
-            .then((data) => {
-                alert(data);
-                setCollectableList(collectableList.filter(
-                    (exchange) => exchange.exchangeId !== exchangeId
-                ));
-            });
+        const result = window.confirm("Are you sure to delete this exchange?");
+        if (result) {
+            const url = `/api/manage/deleteCollectable?collectableId=${exchangeId}`;
+            fetch(url)
+                .then((response) => response.text())
+                .then((data) => {
+                    alert(data);
+                    setCollectableList(collectableList.filter(
+                        (exchange) => exchange.exchangeId !== exchangeId
+                    ));
+                });
+        }
     };
 
 
