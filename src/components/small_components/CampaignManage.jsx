@@ -61,8 +61,8 @@ function CampaignManage() {
                                 <td>{exchange.sellingOrBuying}</td>
                                 <td>{exchange.price}</td>
                                 <td>{exchange.priority}</td>
-                                <td>{exchange.visibility}</td>
-                                <td>{exchange.isPending}</td>
+                                <td>{exchange.visibility ? "true" : "false"}</td>
+                                <td>{exchange.pending ? "true" : "false"}</td>
                                 <td>{exchange.updateDate}</td>
                                 <td>
                                     <button onClick={() => deleteCollectable(exchange.exchangeId)}>Delete Collectable</button>
