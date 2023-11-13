@@ -21,8 +21,9 @@ function Analytics() {
             })
     }, []);
     
-    return ( <>
-    </> );
+    return ( <section className="analytics-container">
+        
+    </section> );
 }
 
 export default Analytics;
