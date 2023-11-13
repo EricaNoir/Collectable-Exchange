@@ -63,7 +63,21 @@ function CampaignManage() {
                                 <td>{exchange.priority}</td>
                                 <td>{exchange.visibility ? "true" : "false"}</td>
                                 <td>{exchange.pending ? "true" : "false"}</td>
-                                <td>{exchange.updateDate}</td>
+                                <td>{new Date(exchange.updateDate)
+                                    .getHours()
+                                    .toString()
+                                    .padStart(2, "0")}
+                                    :
+                                    {new Date(exchange.updateDate)
+                                        .getMinutes()
+                                        .toString()
+                                        .padStart(2, "0")}{" "}
+                                    {new Date(exchange.updateDate).getDate()}/
+                                    {(new Date(exchange.updateDate).getMonth() + 1)
+                                        .toString()
+                                        .padStart(2, "0")}
+                                    /{new Date(exchange.updateDate).getFullYear()}
+                                </td>
                                 <td>
                                     <button onClick={() => deleteCollectable(exchange.exchangeId)}>Delete Collectable</button>
                                 </td>
