@@ -48,9 +48,9 @@ function EditAdImgButton() {
                 <div className="floating-form-container">
                     <h1>Edit Ad image</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="adImage">
+                        <h3>
                             Upload a new advertisement image, please only upload .png file.
-                        </label>
+                        </h3>
                         <input
                             type="file"
                             name="adImage"

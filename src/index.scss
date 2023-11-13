@@ -83,10 +83,10 @@ button:focus-visible {
 
 .floating-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    top: -50vh;
+    left: -50vw;
+    width: 200vw;
+    height: 200vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: 300;
     animation: fadeIn 0.3s forwards;
