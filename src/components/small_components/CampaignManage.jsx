@@ -4,16 +4,13 @@ import React from "react";
 import CreateCampaignButton from "./CreateCampageButton";
 
 function CampaignManage() {
-
     const [collectableList, setCollectableList] = React.useState(null);
     // load collectable full list
     React.useEffect(() => {
-        const url = "/api/manage/allCollectable"
+        const url = "/api/manage/allCollectable";
         fetch(url)
             .then((response) => response.json())
-            .then((data) =>
-                setCollectableList(data)
-            );
+            .then((data) => setCollectableList(data));
     }, []);
 
     function deleteCollectable(exchangeId) {
@@ -24,18 +21,21 @@ function CampaignManage() {
                 .then((response) => response.text())
                 .then((data) => {
                     alert(data);
-                    setCollectableList(collectableList.filter(
-                        (exchange) => exchange.exchangeId !== exchangeId
-                    ));
+                    setCollectableList(
+                        collectableList.filter(
+                            (exchange) => exchange.exchangeId !== exchangeId
+                        )
+                    );
                 });
         }
-    };
-
+    }
 
     return (
         <>
-            <h2>Collectable Full List</h2>
-            <CreateCampaignButton />
+            <div className="table-header-container">
+                <h2 className="section-title">Current Trade Full List</h2>
+                <CreateCampaignButton />
+            </div>
             {collectableList && (
                 <table>
                     <thead>
@@ -61,32 +61,51 @@ function CampaignManage() {
                                 <td>{exchange.sellingOrBuying}</td>
                                 <td>{exchange.price}</td>
                                 <td>{exchange.priority}</td>
-                                <td>{exchange.visibility ? "true" : "false"}</td>
+                                <td>
+                                    {exchange.visibility ? "true" : "false"}
+                                </td>
                                 <td>{exchange.pending ? "true" : "false"}</td>
-                                <td>{new Date(exchange.updateDate)
-                                    .getHours()
-                                    .toString()
-                                    .padStart(2, "0")}
+                                <td>
+                                    {new Date(exchange.updateDate)
+                                        .getHours()
+                                        .toString()
+                                        .padStart(2, "0")}
                                     :
                                     {new Date(exchange.updateDate)
                                         .getMinutes()
                                         .toString()
                                         .padStart(2, "0")}{" "}
                                     {new Date(exchange.updateDate).getDate()}/
-                                    {(new Date(exchange.updateDate).getMonth() + 1)
+                                    {(
+                                        new Date(
+                                            exchange.updateDate
+                                        ).getMonth() + 1
+                                    )
                                         .toString()
                                         .padStart(2, "0")}
-                                    /{new Date(exchange.updateDate).getFullYear()}
+                                    /
+                                    {new Date(
+                                        exchange.updateDate
+                                    ).getFullYear()}
                                 </td>
                                 <td>
-                                    <button onClick={() => deleteCollectable(exchange.exchangeId)}>Delete Collectable</button>
+                                    <button
+                                        onClick={() =>
+                                            deleteCollectable(
+                                                exchange.exchangeId
+                                            )
+                                        }
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             )}
-        </>);
+        </>
+    );
 }
 
 export default CampaignManage;

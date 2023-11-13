@@ -81,7 +81,7 @@ function CreateCampaignButton() {
     
     return (
         <>
-            <button onClick={openWindow}>Create New Campaign</button>
+            <button onClick={openWindow} className="create-campaign-btn">Create New Campaign</button>
             {isFloatingShow && floatingWindow}
         </>
     );
