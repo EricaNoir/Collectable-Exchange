@@ -199,14 +199,21 @@
     padding: 16px 24px;
     margin: 20px;
     border-bottom: 1px solid #e6e5e5;
+    .trade-history-img-container {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+            height: 100%;
+            width: auto;
+            border-radius: 10px;
+        }
+    }
 }
-.trade-history-card > img {
-    height: 100%;
-    width: 200px;
-    margin-right: 40px;
-    border-radius: 10px;
-}
+
 .card-box {
+    width: 70%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -225,14 +232,7 @@
     margin-bottom: 0px;
 }
 
-.trade-history-image-div {
-    margin: 5px;
-    height: 72px;
-    img {
-        height: 100%;
-        border-radius: 8px;
-    }
-}
+
 .trade-history-card-1 {
     display: flex;
     flex-direction: column;

@@ -9,9 +9,12 @@
 function TradeHistoryCard({ trade }) {
     return (
         <div className="trade-history-card">
-            <img
-                src={`http://localhost:8080/images/${trade.collectableImage}`}
-            />
+            <div className="trade-history-img-container">
+                <img
+                    src={`http://localhost:8080/images/${trade.collectableImage}`}
+                />
+            </div>
+
             <div className="card-box">
                 <div>
                     <span>Name:</span>
@@ -23,7 +26,21 @@ function TradeHistoryCard({ trade }) {
                 </div>
                 <div>
                     <span>Trade time:</span>
-                    <div>{trade.tradeDate}</div>
+                    <div>{new Date(trade.tradeDate)
+                            .getHours()
+                            .toString()
+                            .padStart(2, "0")}:{new Date(trade.tradeDate)
+                            .getMinutes()
+                            .toString()
+                            .padStart(2, "0")} {new Date(
+                            trade.tradeDate
+                        ).getDate()}/{(
+                            new Date(trade.tradeDate).getMonth() + 1
+                        )
+                            .toString()
+                            .padStart(2, "0")}/{new Date(
+                            trade.tradeDate
+                        ).getFullYear()}</div>
                 </div>
                 <div>
                     <span>Price:</span>
