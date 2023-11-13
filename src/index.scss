@@ -91,6 +91,7 @@ button:focus-visible {
     z-index: 300;
     animation: fadeIn 0.3s forwards;
     opacity: 0;
+    overflow: hidden;
 }
 
 @keyframes fadeIn {

@@ -1,43 +1,44 @@
-.body-container {
-    .manager-admin-hero {
+.manager-admin-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.4);
+    .manager-admin-home-btn-set {
         display: flex;
-        flex-direction: column;
-        h1 {
-            margin: 30px 0px;
+        justify-content: space-around;
+        button {
+            background-color: #4caf50;
+            color: white;
+            width: 200px;
+            margin: 10px 50px 10px 0px;
         }
-        .manager-admin-home-btn-set {
-            display: flex;
-            justify-content: flex-start;
-            button {
-                background-color: #4caf50;
-                color: white;
-                width: 200px;
-                margin: 10px 50px 10px 0px;
-            }
-            button:hover,
-            button:focus {
-                background-color: #45a049;
-            }
-        }
-        .floating-window {
-            button {
-                width: 100%;
-                margin: 20px 0px 0px;
-            }
-            textarea {
-                width: 100%;
-                height: 100px;
-                padding: 10px;
-            }
-            h1 {
-                margin: 10px 0px;
-            }
-            input {
-                height: 100px;
-            }
+        button:hover,
+        button:focus {
+            background-color: #45a049;
         }
     }
+    .floating-window {
+        button {
+            width: 100%;
+            margin: 20px 0px 0px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+        }
+        h1 {
+            margin: 10px 0px;
+        }
+        input {
+            height: 100px;
+        }
+    }
+}
 
+.body-container {
     .analytics-container {
         .section-title {
             font-size: 36px;

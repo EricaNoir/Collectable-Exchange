@@ -26,6 +26,13 @@ function MANavbar() {
             <Link to="/manager-admin-home">
                 <button className="logo">CEMS</button>
             </Link>
+            <h2>
+                {userRole.includes("ADMIN")
+                    ? "Welcome, Administrator"
+                    : userRole.includes("CAMPAIGN_MANAGER")
+                    ? "Welcome, Campaign Manager."
+                    : "Welcome, Manager."}
+            </h2>
             <div className="nav-right">
                 <Link to="/manager-admin-feedback">
                     <button className="inbox-button">Feedback</button>

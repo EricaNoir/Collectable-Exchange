@@ -30,21 +30,14 @@ function MAHomePage() {
     return (
         <>
             <MANavbar />
-            <section className="body-container" id="ma-home-page">
-                <section className="manager-admin-hero">
-                    <h1>
-                        {userRole.includes("ADMIN")
-                            ? "Welcome, Administrator"
-                            : userRole.includes("CAMPAIGN_MANAGER")
-                            ? "Welcome, Campaign Manager."
-                            : "Welcome, Manager."}
-                    </h1>
-                    <section className="manager-admin-home-btn-set">
-                        <EditAdImgButton />
-                        <EditPostButton />
-                    </section>
-                </section>
+            <section className="manager-admin-hero">
 
+                <section className="manager-admin-home-btn-set">
+                    <EditAdImgButton />
+                    <EditPostButton />
+                </section>
+            </section>
+            <section className="body-container" id="ma-home-page">
                 <Analytics />
 
                 {(userRole.includes("CAMPAIGN_MANAGER") ||
