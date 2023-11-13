@@ -36,6 +36,7 @@ function CreateManagerButton() {
                     if (data === "Success.") {
                         alert("New manager created successfully!");
                     } else alert(data);
+                    closeWindow();
                 });
         }
     };
@@ -43,6 +44,11 @@ function CreateManagerButton() {
     // Hanlde floating window
     const [isFloatingShow, setIsFloatingShow] = React.useState(false);
     function closeWindow() {
+        setCreateManager({
+            username: "",
+            password: "",
+            passwordConfirmation: "",
+        });
         setIsFloatingShow(false);
     }
     function openWindow() {
