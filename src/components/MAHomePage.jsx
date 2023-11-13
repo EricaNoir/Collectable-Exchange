@@ -30,7 +30,7 @@ function MAHomePage() {
     return (
         <>
             <MANavbar />
-            <section className="body-container">
+            <section className="body-container" id="ma-home-page">
                 <section className="manager-admin-hero">
                     <h1>
                         {userRole.includes("ADMIN")

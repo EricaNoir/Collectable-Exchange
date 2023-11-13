@@ -124,7 +124,7 @@ function Analytics() {
         <section className="analytics-container">
             {analytics ? (
                 <>
-                <h2 className="section-title">Analytics</h2>
+                    <h2 className="section-title">Analytics</h2>
                     <div>
                         {traderRank}
                         {tradeAmount}
