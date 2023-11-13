@@ -41,6 +41,8 @@ function StaffLogInPage() {
                         return response.json();
                     })
                     .then((data) => {
+                        console.log(data);
+                        console.log(formData);
                         if (
                             !data.userRole ||
                             !data.userRole.includes(formData.accountType)

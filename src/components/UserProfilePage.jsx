@@ -92,7 +92,12 @@ function UserProfilePage() {
                         <div className="user-info-container">
                             <div className="user-profile-2">
                                 <h1>User Profile</h1>
-                                <button className="log-out-btn" onClick={() => window.location.href = `/`}>Log out</button>
+                                <button
+                                    className="log-out-btn"
+                                    onClick={() => (window.location.href = `/`)}
+                                >
+                                    Log out
+                                </button>
                             </div>
                             <div className="user-profile-1">
                                 <h2>Welcome</h2>
@@ -106,7 +111,11 @@ function UserProfilePage() {
                             </div>
                             <div className="user-infos">
                                 <img
-                                    src={`http://localhost:8080/images/${user.userImage}`}
+                                    src={
+                                        user.userImage
+                                            ? `http://localhost:8080/images/${user.userImage}`
+                                            : "http://localhost:8080/images/default.png"
+                                    }
                                     alt="User Avatar"
                                 />
                                 <div>
@@ -236,7 +245,9 @@ function UserProfilePage() {
                         </div>
                     </>
                 ) : tradeList ? (
-                    <h2 className="user-trade-history-text">No trade history.</h2>
+                    <h2 className="user-trade-history-text">
+                        No trade history.
+                    </h2>
                 ) : (
                     <div>Loading...</div>
                 )}

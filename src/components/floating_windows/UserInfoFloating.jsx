@@ -39,16 +39,20 @@ function UserInfoFloating({ userName, closeWindow }) {
                 {user ? (
                     <>
                         <div className="user-info">
-                            <div class="img-name-container">
+                            <div className="img-name-container">
                                 <img
-                                    src={`http://localhost:8080/images/${user.userImage}`}
+                                    src={
+                                        user.userImage
+                                            ? `http://localhost:8080/images/${user.userImage}`
+                                            : "http://localhost:8080/images/default.png"
+                                    }
                                     alt="User Avatar"
                                 />
 
                                 <div className="user-name">{user.username}</div>
                             </div>
 
-                            <div class="line-container">
+                            <div className="line-container">
                                 <div className="line">
                                     <img src={emailIcon} />
                                     <strong>Email: </strong>

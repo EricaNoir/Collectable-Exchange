@@ -4,15 +4,13 @@
     display: flex;
     justify-content: center;
     .img-name-container {
-
         display: flex;
         flex-direction: column;
         justify-content: center;
         img {
-            width: 200px;
             flex-shrink: 0;
             height: 200px;
-            margin-right: 40px;
+            margin: 20px;
             border-radius: 10px;
         }
         .user-name {
@@ -20,14 +18,15 @@
             color: #000;
             margin-bottom: 16px;
             font-weight: 500;
-            text-align: center;
+            text-align: left;
+            margin-left: 30px;
         }
     }
     .line-container {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 40px;
+        padding: 30px;
         .line {
             width: 100%;display: flex;
             align-items: center;

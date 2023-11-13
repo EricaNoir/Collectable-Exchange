@@ -1,0 +1,29 @@
+.floating-window {
+    section {
+        border-radius: 16px;
+        background-color: #f1f1f1;
+        padding: 20px;
+        margin-top: 30px;
+        .user-info {
+            background-color: white;
+            border-radius: 16px;
+            img {
+                margin-top: 20px;
+            }
+        }
+        form {
+            margin-top: 30px;
+        }
+    }
+    form {
+        
+        button {
+            width: 100%;
+            margin-top: 20px;
+        }
+    }
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+}

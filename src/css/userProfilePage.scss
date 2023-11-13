@@ -54,7 +54,6 @@
     padding: 20px 0;
 }
 .user-infos > img {
-    width: 200px;
     flex-shrink: 0;
     height: 200px;
     margin-right: 40px;
@@ -171,11 +170,13 @@
 }
 
 .floating-form-container button:not([type="submit"]) {
-    background-color: #eaeaea;
+    background-color: #7a7a7a;
+    color: white;
 }
 
 .floating-form-container button:not([type="submit"]):hover {
-    background-color: #ccc;
+    background-color: #fff;
+    color: black;
 }
 
 .user-trade-history-text {

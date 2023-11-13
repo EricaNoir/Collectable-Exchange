@@ -1,8 +1,5 @@
 // Manage user
 import React from "react";
-import emailIcon from "../../static/email.png";
-import phoneIcon from "../../static/phone.png";
-import facebookIcon from "../../static/facebook.png";
 import copyIcon from "../../static/copy.png";
 
 function ManageUserButton() {
@@ -34,7 +31,7 @@ function ManageUserButton() {
     const handleDeleteUser = () => {
         const result = window.confirm("Are you sure to delete this user?");
         if (result) {
-            const url = "/api/manage/deleteUser"
+            const url = "/api/manage/deleteUser";
             const body = new FormData();
             body.append("username", searchUser);
 
@@ -47,15 +44,17 @@ function ManageUserButton() {
                     alert(data);
                 });
         }
-    }
+    };
     const [managerAuthority, setManagerAuthority] = React.useState("MANAGER");
     function handleAuthorityInput(authority) {
         setManagerAuthority(authority);
     }
     const handleAuthorize = () => {
-        const result = window.confirm("Are you sure to authorize this manager?");
+        const result = window.confirm(
+            "Are you sure to authorize this manager?"
+        );
         if (result) {
-            const url = "/api/manage/managerAuthority"
+            const url = "/api/manage/managerAuthority";
 
             const body = new FormData();
             body.append("username", searchUser);
@@ -70,12 +69,14 @@ function ManageUserButton() {
                     alert(data);
                 });
         }
-    }
+    };
 
     // Hanlde floating window
     const [isFloatingShow, setIsFloatingShow] = React.useState(false);
     function closeWindow() {
         setIsFloatingShow(false);
+        setSearchUser("");
+        setSearchUserInfo("");
     }
     function openWindow() {
         setIsFloatingShow(true);
@@ -85,113 +86,132 @@ function ManageUserButton() {
             <div className="floating-overlay" onClick={closeWindow}></div>
             <div className="floating-window">
                 <div className="floating-form-container">
+                    <h1>Search a user</h1>
                     <div className="search-name-wrapper">
-                        <h1>Search a user</h1>
                         <form onSubmit={handleSearchUserSubmit}>
-                            <label className="search-name-label">
-                                Search by owner name:
-                                <input
-                                    type="text"
-                                    placeholder="Owner Name"
-                                    value={searchUser}
-                                    onChange={(e) =>
-                                        handleSearchUserInput(e.target.value)
-                                    }
-                                />
-                            </label>
+                            <h3>Search by username:</h3>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={searchUser}
+                                onChange={(e) =>
+                                    handleSearchUserInput(e.target.value)
+                                }
+                            />
                             <button type="submit">Search</button>
                         </form>
                     </div>
                     {searchUserInfo && (
-                        <div className="manage-user-card">
-                            <div class="img-name-container">
-                                <img
-                                    src={`http://localhost:8080/images/${searchUserInfo.userImage}`}
-                                    alt="User Avatar"
-                                />
+                        <section>
+                            <div className="user-info">
+                                <div className="img-name-container">
+                                    <img
+                                        src={
+                                            searchUserInfo.userImage
+                                                ? `http://localhost:8080/images/${searchUserInfo.userImage}`
+                                                : "http://localhost:8080/images/default.png"
+                                        }
+                                        alt="User Avatar"
+                                    />
 
-                                <div className="user-name">{searchUserInfo.username}</div>
-                            </div>
+                                    <div className="user-name">
+                                        {searchUserInfo.username}
+                                    </div>
+                                </div>
 
-                            <div class="line-container">
-                                <div className="line">
-                                    <img src={emailIcon} />
-                                    <strong>Email: </strong>
-                                    <div className="info-text">
-                                        <a
-                                            href={`mailto:${searchUserInfo.userEmail}`}
-                                            target="_top"
-                                        >
-                                            {searchUserInfo.userEmail}
-                                        </a>
+                                <div className="line-container">
+                                    <div className="line">
+                                        <strong>Email: </strong>
+                                        <div className="info-text">
+                                            {searchUserInfo.userEmail ? (
+                                                <a
+                                                    href={`mailto:${searchUserInfo.userEmail}`}
+                                                    target="_top"
+                                                >
+                                                    {searchUserInfo.userEmail}
+                                                </a>
+                                            ) : (
+                                                "Not provided"
+                                            )}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="line">
-                                    <img src={phoneIcon} />
-                                    <strong>Phone: </strong>
-                                    <div className="info-text">
-                                        {searchUserInfo.userPhone || "Not provided"}
+                                    <div className="line">
+                                        <strong>Phone: </strong>
+                                        <div className="info-text">
+                                            {searchUserInfo.userPhone ||
+                                                "Not provided"}
+                                        </div>
+                                        {searchUserInfo.userPhone && (
+                                            <img
+                                                src={copyIcon}
+                                                style={{
+                                                    marginLeft: "24px",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() =>
+                                                    copyInfo(
+                                                        searchUserInfo.userPhone
+                                                    )
+                                                }
+                                            />
+                                        )}
                                     </div>
-                                    {searchUserInfo.userPhone && (
-                                        <img
-                                            src={copyIcon}
-                                            style={{
-                                                marginLeft: "24px",
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() =>
-                                                copyInfo(searchUserInfo.userPhone)
-                                            }
-                                        />
-                                    )}
-                                </div>
-                                <div className="line">
-                                    <img src={facebookIcon} />
-                                    <strong>Facebook: </strong>
-                                    <div className="info-text">
-                                        {searchUserInfo.userFacebook || "Not provided"}
+                                    <div className="line">
+                                        <strong>Facebook: </strong>
+                                        <div className="info-text">
+                                            {searchUserInfo.userFacebook ||
+                                                "Not provided"}
+                                        </div>
+                                        {searchUserInfo.userFacebook && (
+                                            <img
+                                                src={copyIcon}
+                                                style={{
+                                                    marginLeft: "24px",
+                                                    cursor: "pointer",
+                                                }}
+                                                onClick={() =>
+                                                    copyInfo(
+                                                        searchUserInfo.userFacebook
+                                                    )
+                                                }
+                                            />
+                                        )}
                                     </div>
-                                    {searchUserInfo.userFacebook && (
-                                        <img
-                                            src={copyIcon}
-                                            style={{
-                                                marginLeft: "24px",
-                                                cursor: "pointer",
-                                            }}
-                                            onClick={() =>
-                                                copyInfo(searchUserInfo.userFacebook)
-                                            }
-                                        />
-                                    )}
-                                </div>
-                                <div className="line">
-                                    <strong>User Role: </strong>
-                                    <div className="info-text">
-                                        {searchUserInfo.userRole}
+                                    <div className="line">
+                                        <strong>User Role: </strong>
+                                        <div className="info-text">
+                                            {searchUserInfo.userRole}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <button className="delete-user-btn" onClick={handleDeleteUser}> Delete</button>
+                            <button
+                                className="delete-user-btn"
+                                onClick={handleDeleteUser}
+                            >
+                                Delete this User
+                            </button>
                             {searchUserInfo.userRole.includes("MANAGER") && (
                                 <div className="manage-authority-wrapper">
-                                    <h2>Select authority</h2>
                                     <form onSubmit={handleAuthorize}>
-                                        <label htmlFor="authority">Account Type:</label>
+                                        <h3>Select permissions to authorise</h3>
                                         <select
                                             name="authority"
                                             onChange={(e) =>
-                                                handleAuthorityInput(e.target.value)
+                                                handleAuthorityInput(
+                                                    e.target.value
+                                                )
                                             }
                                             value={managerAuthority}
                                         >
                                             <option>MANAGER</option>
                                             <option>CAMPAIGN_MANAGER</option>
                                         </select>
-                                        <button type="submit">Authorize</button>
+                                        <button type="submit">Authorise</button>
                                     </form>
                                 </div>
                             )}
-                        </div>
+                        </section>
                     )}
                 </div>
             </div>
