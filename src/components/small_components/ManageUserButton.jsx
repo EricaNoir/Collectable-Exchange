@@ -179,7 +179,9 @@ function ManageUserButton() {
                                         <label htmlFor="authority">Account Type:</label>
                                         <select
                                             name="authority"
-                                            onChange={handleAuthorityInput}
+                                            onChange={(e) =>
+                                                handleAuthorityInput(e.target.value)
+                                            }
                                             value={managerAuthority}
                                         >
                                             <option>MANAGER</option>
