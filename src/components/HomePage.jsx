@@ -396,7 +396,7 @@ function HomePage() {
                             backgroundColor:
                                 currentSection === "plaza"
                                     ? "#333"
-                                    : "lightgray",
+                                    : "white",
                             color:
                                 currentSection === "plaza" ? "white" : "black",
                         }}
