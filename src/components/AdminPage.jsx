@@ -1,4 +1,5 @@
 import '../css/AdminPage.scss'
+import MANavbar from "./small_components/MANavbar";
 import React from 'react';
 /** All functions that only Admin can use
 （ADMIN才有）
@@ -18,7 +19,6 @@ POST set name（下拉菜单）
 编辑卡组优先级
 下拉菜单选择set名
 下拉菜单1-4（4最高）*/
-
 function AdminPage() {
     // create manager
     const [createManager, setCreateManager] = React.useState({
@@ -204,9 +204,12 @@ function AdminPage() {
                     alert(data);
                 });
         }
-    } 
+    }
 
-    return <></>;
+    return (<>
+        <MANavbar />
+    </>);
+
 }
 
 export default AdminPage;
