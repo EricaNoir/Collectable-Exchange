@@ -1,5 +1,6 @@
 // delete campaign
 import React from "react";
+import deleteIcon from "../../static/delete.png";
 
 function DeleteCampaignButton() {
     // delete campaign
@@ -25,7 +26,7 @@ function DeleteCampaignButton() {
     const [deleteCampaign, setDeleteCampaign] = React.useState({
         collectableSet: "",
         collectableName: "",
-    })
+    });
     const handleDeleteCampaignChange = (event) => {
         const { name, value } = event.target;
         setDeleteCampaign({
@@ -37,7 +38,7 @@ function DeleteCampaignButton() {
         event.preventDefault();
         const result = window.confirm("Are you sure to delete this campaign?");
         if (result) {
-            const url = "/api/manage/deleteCampaign"
+            const url = "/api/manage/deleteCampaign";
 
             const body = new FormData();
             body.append("set", deleteCampaign.collectableSet);
@@ -50,16 +51,24 @@ function DeleteCampaignButton() {
                 .then((response) => response.text())
                 .then((data) => {
                     alert(data);
-                    collectableCategory[deleteCampaign.collectableSet] = collectableCategory[deleteCampaign.collectableSet].filter(
-                        (name) => name !== deleteCampaign.collectableName
-                    );
-                    if (collectableCategory[deleteCampaign.collectableSet].length === 0) {
-                        delete collectableCategory[deleteCampaign.collectableSet];
+                    collectableCategory[deleteCampaign.collectableSet] =
+                        collectableCategory[
+                            deleteCampaign.collectableSet
+                        ].filter(
+                            (name) => name !== deleteCampaign.collectableName
+                        );
+                    if (
+                        collectableCategory[deleteCampaign.collectableSet]
+                            .length === 0
+                    ) {
+                        delete collectableCategory[
+                            deleteCampaign.collectableSet
+                        ];
                     }
                     closeWindow();
                 });
         }
-    }
+    };
 
     // Hanlde floating window
     const [isFloatingShow, setIsFloatingShow] = React.useState(false);
@@ -76,10 +85,12 @@ function DeleteCampaignButton() {
             <div className="floating-window">
                 <div className="floating-form-container">
                     <h1>Delete campaign</h1>
-                    {collectableCategory &&
+                    {collectableCategory && (
                         <form onSubmit={handleDeleteCampaignSubmit}>
                             <div>
-                                <label htmlFor="collectableSet">Item Set:</label>
+                                <label htmlFor="collectableSet">
+                                    Item Set:
+                                </label>
                                 <select
                                     name="collectableSet"
                                     onChange={handleDeleteCampaignChange}
@@ -89,37 +100,46 @@ function DeleteCampaignButton() {
                                     <option value="" disabled>
                                         Select a set
                                     </option>
-                                    {Object.keys(collectableCategory).map((set) => (
-                                        <option key={set}>{set}</option>
-                                    ))}
+                                    {Object.keys(collectableCategory).map(
+                                        (set) => (
+                                            <option key={set}>{set}</option>
+                                        )
+                                    )}
                                 </select>
                             </div>
                             <div>
-                            {deleteCampaign.collectableSet && (
-                                <>
-                                    <label htmlFor="collectableName">
-                                        Item Name:
-                                    </label>
-                                    <select
-                                        name="collectableName"
-                                        onChange={handleDeleteCampaignChange}
-                                        value={deleteCampaign.collectableName}
-                                        required
-                                    >
-                                        <option value="" disabled>
-                                            Select an item
-                                        </option>
-                                        {collectableCategory[
-                                            deleteCampaign.collectableSet
-                                        ].map((name) => (
-                                            <option key={name}>{name}</option>
-                                        ))}
-                                    </select>
-                                </>
-                            )}
-                        </div>
+                                {deleteCampaign.collectableSet && (
+                                    <>
+                                        <label htmlFor="collectableName">
+                                            Item Name:
+                                        </label>
+                                        <select
+                                            name="collectableName"
+                                            onChange={
+                                                handleDeleteCampaignChange
+                                            }
+                                            value={
+                                                deleteCampaign.collectableName
+                                            }
+                                            required
+                                        >
+                                            <option value="" disabled>
+                                                Select an item
+                                            </option>
+                                            {collectableCategory[
+                                                deleteCampaign.collectableSet
+                                            ].map((name) => (
+                                                <option key={name}>
+                                                    {name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </>
+                                )}
+                            </div>
                             <button type="submit">Delete</button>
-                        </form>}
+                        </form>
+                    )}
                 </div>
             </div>
         </>
@@ -127,7 +147,10 @@ function DeleteCampaignButton() {
 
     return (
         <>
-            <button onClick={openWindow}>Delete Campaign</button>
+            <button onClick={openWindow} className="admin-button">
+                <img src={deleteIcon} />
+                Delete Campaign
+            </button>
             {isFloatingShow && floatingWindow}
         </>
     );
