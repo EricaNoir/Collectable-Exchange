@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2); /* Optional: adds a shadow for better visibility */
-    z-index: 1000; /* Ensures the navbar is above other content */
+    z-index: 200; /* Ensures the navbar is above other content */
 }
 
 .logo {

@@ -30,6 +30,10 @@
         background-color: #9c9c9c;
         color: white;
     }
+    button:hover,
+    button:focus {
+        background-color: #c5c5c5;
+    }
 }
 
 .feedback-container {
@@ -51,8 +55,13 @@
             padding: 10px;
         }
         button {
-            background-color: #9c9c9c;
+            background-color: #4caf50;
             color: white;
+        }
+
+        button:hover,
+        button:focus {
+            background-color: #45a049;
         }
     }
 }

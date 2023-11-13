@@ -105,7 +105,7 @@ function EditUserInfoFloating({ user, closeWindow }) {
     };
     return (
         <>
-            <div className="help-and-about-overlay" onClick={closeWindow}></div>
+            <div className="floating-overlay" onClick={closeWindow}></div>
             <div className="floating-window">
                 {collectableCategory !== null ? (
                     <div className="floating-form-container">

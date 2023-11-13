@@ -1,0 +1,19 @@
+.body-container {
+    .manager-admin-hero {
+        display: flex;
+        flex-direction: column;
+        .manager-admin-home-btn-set {
+            display: flex;
+            justify-content: space-between;
+            button {
+                background-color: #4caf50;
+                color: white;
+                width: 200px;
+            }
+            button:hover,
+            button:focus {
+                background-color: #45a049;
+            }
+        }
+    }
+}

@@ -60,7 +60,7 @@ function CreateCollectableFloating({ nameList, closeWindow, onCreateSuccess }) {
 
     return (
         <>
-            <div className="help-and-about-overlay" onClick={closeWindow}></div>
+            <div className="floating-overlay" onClick={closeWindow}></div>
             <div className="floating-window">
                 <div className="floating-form-container">
                     <h1>Create a collectable trade</h1>

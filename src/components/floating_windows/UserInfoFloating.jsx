@@ -34,7 +34,7 @@ function UserInfoFloating({ userName, closeWindow }) {
 
     return (
         <>
-            <div className="help-and-about-overlay" onClick={closeWindow}></div>
+            <div className="floating-overlay" onClick={closeWindow}></div>
             <div className="floating-window">
                 {user ? (
                     <>
@@ -44,10 +44,10 @@ function UserInfoFloating({ userName, closeWindow }) {
                                 alt="User Avatar"
                             />
                             <div>
-                                <div className="user-names">
+                                <div className="user-name">
                                     {user.username}
                                 </div>
-                                <div className="rich-rows">
+                                <div className="line">
                                     <div>
                                         <img src={emailIcon} />
                                         <span>Email: </span>
@@ -80,7 +80,7 @@ function UserInfoFloating({ userName, closeWindow }) {
                                         )}
                                     </div>
                                 </div>
-                                <div className="rich-rows set-line">
+                                <div className="line">
                                     <div>
                                         <img src={facebookIcon} />
                                         <span>Facebook: </span>
@@ -102,7 +102,7 @@ function UserInfoFloating({ userName, closeWindow }) {
                                         )}
                                     </div>
                                 </div>
-                                <div className="rich-rows set-line">
+                                <div className="line">
                                     <div>
                                         <img src={buyIcon} />
                                         <span>
@@ -123,7 +123,7 @@ function UserInfoFloating({ userName, closeWindow }) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="rich-rows set-line">
+                                <div className="line">
                                     <div>
                                         <img src={saleIcon} />
                                         <span>
