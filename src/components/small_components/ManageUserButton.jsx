@@ -1,6 +1,7 @@
 // Manage user
 import React from "react";
 import copyIcon from "../../static/copy.png";
+import defaultImg from "../../static/default.png"
 
 function ManageUserButton() {
     // search user, delete/authorize
@@ -114,7 +115,7 @@ function ManageUserButton() {
                                         src={
                                             searchUserInfo.userImage
                                                 ? `http://localhost:8080/images/${searchUserInfo.userImage}`
-                                                : "http://localhost:8080/images/default.png"
+                                                : defaultImg
                                         }
                                         alt="User Avatar"
                                     />

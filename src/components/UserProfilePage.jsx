@@ -12,6 +12,7 @@ import facebookIcon from "../static/facebook.png";
 import buyIcon from "../static/buy.png";
 import saleIcon from "../static/sale.png";
 import copyIcon from "../static/copy.png";
+import defaultImg from "../static/default.png"
 
 function UserProfilePage() {
     const { userName } = useParams();
@@ -114,7 +115,7 @@ function UserProfilePage() {
                                     src={
                                         user.userImage
                                             ? `http://localhost:8080/images/${user.userImage}`
-                                            : "http://localhost:8080/images/default.png"
+                                            : defaultImg
                                     }
                                     alt="User Avatar"
                                 />

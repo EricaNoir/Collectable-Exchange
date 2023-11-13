@@ -5,6 +5,7 @@ import facebookIcon from "../../static/facebook.png";
 import buyIcon from "../../static/buy.png";
 import saleIcon from "../../static/sale.png";
 import copyIcon from "../../static/copy.png";
+import defaultImg from "../../static/default.png"
 import React from "react";
 
 function UserInfoFloating({ userName, closeWindow }) {
@@ -44,7 +45,7 @@ function UserInfoFloating({ userName, closeWindow }) {
                                     src={
                                         user.userImage
                                             ? `http://localhost:8080/images/${user.userImage}`
-                                            : "http://localhost:8080/images/default.png"
+                                            : defaultImg
                                     }
                                     alt="User Avatar"
                                 />
