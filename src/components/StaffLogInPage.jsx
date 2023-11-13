@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function StaffLogInPage() {
     const [formData, setFormData] = React.useState({
-        accountType: "",
+        accountType: "MANAGER",
         username: "",
         password: "",
     });
@@ -41,14 +41,17 @@ function StaffLogInPage() {
                         return response.json();
                     })
                     .then((data) => {
-                        if (!data.userRole.includes(formData.accountType)) {
+                        if (
+                            !data.userRole ||
+                            !data.userRole.includes(formData.accountType)
+                        ) {
                             alert("Your account type is wrong!");
                         } else {
                             window.location.href = "/manager-admin-home";
                         }
                     });
             } else {
-                alert("Login fail.")
+                alert("Login fail.");
             }
         });
     };
@@ -71,14 +74,11 @@ function StaffLogInPage() {
                         <select
                             name="accountType"
                             id="accountType"
+                            value={formData.accountType}
                             onChange={handleInputChange}
                         >
-                            <option value={formData.accountType}>
-                                MANAGER
-                            </option>
-                            <option value={formData.accountType}>
-                                ADMIN
-                            </option>
+                            <option>MANAGER</option>
+                            <option>ADMIN</option>
                         </select>
                     </div>
 
