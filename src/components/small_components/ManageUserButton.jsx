@@ -1,7 +1,8 @@
 // Manage user
 import React from "react";
 import copyIcon from "../../static/copy.png";
-import defaultImg from "../../static/default.png"
+import defaultImg from "../../static/default.png";
+import manageIcon from "../../static/manage.png";
 
 function ManageUserButton() {
     // search user, delete/authorize
@@ -30,7 +31,7 @@ function ManageUserButton() {
             });
     };
     const handleDeleteUser = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const result = window.confirm("Are you sure to delete this user?");
         if (result) {
             const url = "/api/manage/deleteUser";
@@ -53,7 +54,7 @@ function ManageUserButton() {
         setManagerAuthority(authority);
     }
     const handleAuthorize = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         const result = window.confirm(
             "Are you sure to authorize this manager?"
         );
@@ -67,7 +68,7 @@ function ManageUserButton() {
             fetch(url, {
                 method: "POST",
                 body: body,
-                })
+            })
                 .then((response) => response.text())
                 .then((data) => {
                     alert(data);
@@ -197,26 +198,33 @@ function ManageUserButton() {
                             >
                                 Delete this User
                             </button>
-                            {searchUserInfo.userRole && searchUserInfo.userRole.includes("MANAGER") && (
-                                <div className="manage-authority-wrapper">
-                                    <form onSubmit={handleAuthorize}>
-                                        <h3>Select permissions to authorise</h3>
-                                        <select
-                                            name="authority"
-                                            onChange={(e) =>
-                                                handleAuthorityInput(
-                                                    e.target.value
-                                                )
-                                            }
-                                            value={managerAuthority}
-                                        >
-                                            <option>MANAGER</option>
-                                            <option>CAMPAIGN_MANAGER</option>
-                                        </select>
-                                        <button type="submit">Authorise</button>
-                                    </form>
-                                </div>
-                            )}
+                            {searchUserInfo.userRole &&
+                                searchUserInfo.userRole.includes("MANAGER") && (
+                                    <div className="manage-authority-wrapper">
+                                        <form onSubmit={handleAuthorize}>
+                                            <h3>
+                                                Select permissions to authorise
+                                            </h3>
+                                            <select
+                                                name="authority"
+                                                onChange={(e) =>
+                                                    handleAuthorityInput(
+                                                        e.target.value
+                                                    )
+                                                }
+                                                value={managerAuthority}
+                                            >
+                                                <option>MANAGER</option>
+                                                <option>
+                                                    CAMPAIGN_MANAGER
+                                                </option>
+                                            </select>
+                                            <button type="submit">
+                                                Authorise
+                                            </button>
+                                        </form>
+                                    </div>
+                                )}
                         </section>
                     )}
                 </div>
@@ -226,7 +234,10 @@ function ManageUserButton() {
 
     return (
         <>
-            <button onClick={openWindow}>Manage User and Manager</button>
+            <button onClick={openWindow} className="admin-button">
+                <img src={manageIcon} />
+                Manage User and Manager
+            </button>
             {isFloatingShow && floatingWindow}
         </>
     );

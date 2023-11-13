@@ -1,5 +1,6 @@
 // Create Manager floating window
 import React from "react";
+import addIcon from "../../static/add.png";
 
 function CreateManagerButton() {
     // create manager
@@ -102,7 +103,9 @@ function CreateManagerButton() {
 
     return (
         <>
-            <button onClick={openWindow}>Create New Manager.</button>
+            <button onClick={openWindow} className="admin-button">
+                <img src={addIcon} />
+                Create New Manager</button>
             {isFloatingShow && floatingWindow}
         </>
     );

@@ -1,4 +1,5 @@
 import React from "react";
+import priorityIcon from "../../static/priority.png";
 
 function ManageCampaignPriorityButton() {
     // Get current collectable category as a Json
@@ -34,9 +35,11 @@ function ManageCampaignPriorityButton() {
     };
     const handlePrioritySubmit = (event) => {
         event.preventDefault();
-        const result = window.confirm("Are you sure to change the priority of this campaign?");
+        const result = window.confirm(
+            "Are you sure to change the priority of this campaign?"
+        );
         if (result) {
-            const url = "/api/manage/moderatePriority"
+            const url = "/api/manage/moderatePriority";
 
             const body = new FormData();
             body.append("set", setPriority.set);
@@ -52,7 +55,7 @@ function ManageCampaignPriorityButton() {
                     closeWindow();
                 });
         }
-    }
+    };
 
     // Hanlde floating window
     const [isFloatingShow, setIsFloatingShow] = React.useState(false);
@@ -69,7 +72,7 @@ function ManageCampaignPriorityButton() {
             <div className="floating-window">
                 <div className="floating-form-container">
                     <h1>Manage Campaign Priority</h1>
-                    {collectableCategory &&
+                    {collectableCategory && (
                         <form onSubmit={handlePrioritySubmit}>
                             <div>
                                 <label htmlFor="set">Item Set:</label>
@@ -82,16 +85,19 @@ function ManageCampaignPriorityButton() {
                                     <option value="" disabled>
                                         Select a set
                                     </option>
-                                    {Object.keys(collectableCategory).map((set) => (
-                                        <option key={set}>{set}</option>
-                                    ))}
+                                    {Object.keys(collectableCategory).map(
+                                        (set) => (
+                                            <option key={set}>{set}</option>
+                                        )
+                                    )}
                                 </select>
                             </div>
                             <div>
                                 {setPriority.set && (
                                     <>
                                         <label htmlFor="priority">
-                                            Priority (4 is the highest priority):
+                                            Priority (4 is the highest
+                                            priority):
                                         </label>
                                         <select
                                             name="priority"
@@ -108,7 +114,8 @@ function ManageCampaignPriorityButton() {
                                 )}
                             </div>
                             <button type="submit">Change</button>
-                        </form>}
+                        </form>
+                    )}
                 </div>
             </div>
         </>
@@ -116,7 +123,10 @@ function ManageCampaignPriorityButton() {
 
     return (
         <>
-            <button onClick={openWindow}>Manage Campaign Priority</button>
+            <button onClick={openWindow} className="admin-button">
+                <img src={priorityIcon} />
+                Manage Campaign Priority
+            </button>
             {isFloatingShow && floatingWindow}
         </>
     );
