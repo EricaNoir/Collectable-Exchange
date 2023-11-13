@@ -28,7 +28,8 @@ function ManageUserButton() {
                 console.error("Fetch error:", error);
             });
     };
-    const handleDeleteUser = () => {
+    const handleDeleteUser = (event) => {
+        event.preventDefault()
         const result = window.confirm("Are you sure to delete this user?");
         if (result) {
             const url = "/api/manage/deleteUser";
@@ -42,6 +43,7 @@ function ManageUserButton() {
                 .then((response) => response.text())
                 .then((data) => {
                     alert(data);
+                    closeWindow();
                 });
         }
     };
@@ -49,7 +51,8 @@ function ManageUserButton() {
     function handleAuthorityInput(authority) {
         setManagerAuthority(authority);
     }
-    const handleAuthorize = () => {
+    const handleAuthorize = (event) => {
+        event.preventDefault()
         const result = window.confirm(
             "Are you sure to authorize this manager?"
         );
@@ -63,10 +66,11 @@ function ManageUserButton() {
             fetch(url, {
                 method: "POST",
                 body: body,
-            })
+                })
                 .then((response) => response.text())
                 .then((data) => {
                     alert(data);
+                    closeWindow();
                 });
         }
     };
@@ -76,7 +80,8 @@ function ManageUserButton() {
     function closeWindow() {
         setIsFloatingShow(false);
         setSearchUser("");
-        setSearchUserInfo("");
+        setSearchUserInfo(null);
+        setManagerAuthority("MANAGER");
     }
     function openWindow() {
         setIsFloatingShow(true);
