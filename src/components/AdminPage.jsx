@@ -1,5 +1,6 @@
-import '../css/AdminPage.scss'
+import "../css/AdminPage.scss";
 
+import MANavbar from "./small_components/MANavbar";
 /** All functions that only Admin can use
 （ADMIN才有）
 创建新Manager账号的功能
@@ -18,9 +19,12 @@ POST set name（下拉菜单）
 编辑卡组优先级
 下拉菜单选择set名
 下拉菜单1-4（4最高）*/
-
 function AdminPage() {
-    return <></>;
+    return (
+        <>
+            <MANavbar />
+        </>
+    );
 }
 
 export default AdminPage;

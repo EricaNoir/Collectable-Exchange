@@ -37,7 +37,7 @@ function LogInPage() {
                 console.log("success");
                 window.location.href = `/home/${formData.username}`;
             } else {
-                alert("Login fail.");
+                alert("Login fail, username or password is incorrect.");
             }
         });
     };

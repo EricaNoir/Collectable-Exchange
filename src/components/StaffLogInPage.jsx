@@ -51,7 +51,7 @@ function StaffLogInPage() {
                         }
                     });
             } else {
-                alert("Login fail.");
+                alert("Login fail, username or password is incorrect.");
             }
         });
     };

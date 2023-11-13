@@ -1,6 +1,26 @@
 import { Link } from "react-router-dom";
+import React from "react";
 
-function MANavbar({ userRole }) {
+function MANavbar() {
+    // User info
+    const [userRole, setUserRole] = React.useState("");
+
+    React.useEffect(() => {
+        fetch("/api/myProfile")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then((data) => {
+                setUserRole(data.userRole);
+            })
+            .catch((error) => {
+                console.error("Fetch error:", error);
+            });
+    }, []);
+
     return (
         <nav className="main-nav">
             <Link to="/manager-admin-home">

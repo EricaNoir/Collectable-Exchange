@@ -11,7 +11,6 @@ import React from "react";
 function MAHomePage() {
     // User info
     const [userRole, setUserRole] = React.useState("");
-
     React.useEffect(() => {
         fetch("/api/myProfile")
             .then((response) => {
@@ -30,10 +29,22 @@ function MAHomePage() {
 
     return (
         <>
-            <MANavbar userRole={userRole} />
-            <Analytics />
-            <EditAdImgButton />
-            <EditPostButton />
+            <MANavbar />
+            <section className="manager-admin-home-content">
+                <h2>
+                    {userRole.includes("ADMIN")
+                        ? "Welcome, Administrator"
+                        : userRole.includes("CAMPAIGN_MANAGER")
+                        ? "Welcome, Campaign Manager."
+                        : "Welcome, Manager."}
+                </h2>
+                <Analytics />
+                <section className="manager-admin-home-btn-set">
+                    <EditAdImgButton />
+                    <EditPostButton />
+                </section>
+            </section>
+
             {(userRole.includes("CAMPAIGN_MANAGER") ||
                 userRole.includes("ADMIN")) && <CampaignManage />}
         </>
