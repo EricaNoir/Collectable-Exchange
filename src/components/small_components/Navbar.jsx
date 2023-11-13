@@ -6,7 +6,7 @@ import "../../css/navbar.scss";
     Contains: LOGO, Inbox button, UserAvatar (Profile button)
  */
 
-function Navbar({ userName, userAvatar }) {
+function Navbar({ userName }) {
     return (
         <nav className="main-nav">
             <Link to={`/home/${userName}`}>

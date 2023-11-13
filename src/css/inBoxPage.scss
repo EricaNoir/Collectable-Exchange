@@ -9,47 +9,38 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-}
-
-.trade-request-card {
-    width: 360px;
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 240px;
-    background-color: rgb(33, 121, 91);
-    margin: 20px;
-    padding: 30px;
-}
-
-.trade-request-card h2,
-.trade-request-card h3,
-.trade-request-card p {
-    color: white;
-    margin: 0px;
-}
-
-.request-image-container {
-    height: 100px;
-}
-.request-image-container img {
-    height: 100%;
-}
-
-.outgoing-request-card-1 {
-    display: flex;
-    justify-content: space-between;
-}
-
-.outgoing-request-card-1 h2 {
-    width: 200px;
-}
-
-.outgoing-request-card-2 {
-}
-
-.outgoing-request-card-3 {
-    display: flex;
-    justify-content: space-between;
+    .trade-request-card {
+        width: 360px;
+        border-radius: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 240px;
+        background-color: rgb(33, 121, 91);
+        margin: 20px;
+        padding: 30px;
+        h2,
+        h3,
+        p {
+            color: white;
+            margin: 0px;
+        }
+        .request-image-container {
+            height: 100px;
+            img {
+                height: 100%;
+            }
+        }
+        .outgoing-request-card-1 {
+            display: flex;
+            justify-content: space-between;
+            h2 {
+                width: 200px;
+            }
+        }
+        .outgoing-request-card-3 {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
 }
