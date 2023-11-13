@@ -38,115 +38,107 @@ function UserInfoFloating({ userName, closeWindow }) {
             <div className="floating-window">
                 {user ? (
                     <>
-                        <div className="user-infos">
-                            <img
-                                src={`http://localhost:8080/images/${user.userImage}`}
-                                alt="User Avatar"
-                            />
-                            <div>
-                                <div className="user-name">
-                                    {user.username}
-                                </div>
+                        <div className="user-info">
+                            <div class="img-name-container">
+                                <img
+                                    src={`http://localhost:8080/images/${user.userImage}`}
+                                    alt="User Avatar"
+                                />
+
+                                <div className="user-name">{user.username}</div>
+                            </div>
+
+                            <div class="line-container">
                                 <div className="line">
-                                    <div>
-                                        <img src={emailIcon} />
-                                        <span>Email: </span>
-                                        <div>
-                                            <a
-                                                href={`mailto:${user.userEmail}`}
-                                                target="_top"
-                                            >
-                                                {user.userEmail}
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <img src={phoneIcon} />
-                                        <span>Phone: </span>
-                                        <div>
-                                            {user.userPhone || "Not provided"}
-                                        </div>
-                                        {user.userPhone && (
-                                            <img
-                                                src={copyIcon}
-                                                style={{
-                                                    marginLeft: "24px",
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() =>
-                                                    copyInfo(user.userPhone)
-                                                }
-                                            />
-                                        )}
+                                    <img src={emailIcon} />
+                                    <strong>Email: </strong>
+                                    <div className="info-text">
+                                        <a
+                                            href={`mailto:${user.userEmail}`}
+                                            target="_top"
+                                        >
+                                            {user.userEmail}
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="line">
-                                    <div>
-                                        <img src={facebookIcon} />
-                                        <span>Facebook: </span>
-                                        <div>
-                                            {user.userFacebook ||
-                                                "Not provided"}
-                                        </div>
-                                        {user.userFacebook && (
-                                            <img
-                                                src={copyIcon}
-                                                style={{
-                                                    marginLeft: "24px",
-                                                    cursor: "pointer",
-                                                }}
-                                                onClick={() =>
-                                                    copyInfo(user.userFacebook)
-                                                }
-                                            />
-                                        )}
+                                    <img src={phoneIcon} />
+                                    <strong>Phone: </strong>
+                                    <div className="info-text">
+                                        {user.userPhone || "Not provided"}
+                                    </div>
+                                    {user.userPhone && (
+                                        <img
+                                            src={copyIcon}
+                                            style={{
+                                                marginLeft: "24px",
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() =>
+                                                copyInfo(user.userPhone)
+                                            }
+                                        />
+                                    )}
+                                </div>
+                                <div className="line">
+                                    <img src={facebookIcon} />
+                                    <strong>Facebook: </strong>
+                                    <div className="info-text">
+                                        {user.userFacebook || "Not provided"}
+                                    </div>
+                                    {user.userFacebook && (
+                                        <img
+                                            src={copyIcon}
+                                            style={{
+                                                marginLeft: "24px",
+                                                cursor: "pointer",
+                                            }}
+                                            onClick={() =>
+                                                copyInfo(user.userFacebook)
+                                            }
+                                        />
+                                    )}
+                                </div>
+                                <div className="line">
+                                    <img src={buyIcon} />
+                                    <strong>
+                                        Most Desired Collectible to Buy:{" "}
+                                    </strong>
+                                    <div className="info-text">
+                                        {user.buyingCollectableInterested
+                                            ? `${
+                                                  user.buyingCollectableInterested.split(
+                                                      "---"
+                                                  )[1]
+                                              } from ${
+                                                  user.buyingCollectableInterested.split(
+                                                      "---"
+                                                  )[0]
+                                              }`
+                                            : "Not provided"}
                                     </div>
                                 </div>
                                 <div className="line">
-                                    <div>
-                                        <img src={buyIcon} />
-                                        <span>
-                                            Most Desired Collectible to Buy:{" "}
-                                        </span>
-                                        <div>
-                                            {user.buyingCollectableInterested
-                                                ? `${
-                                                      user.buyingCollectableInterested.split(
-                                                          "---"
-                                                      )[1]
-                                                  } from ${
-                                                      user.buyingCollectableInterested.split(
-                                                          "---"
-                                                      )[0]
-                                                  }`
-                                                : "Not provided"}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="line">
-                                    <div>
-                                        <img src={saleIcon} />
-                                        <span>
-                                            Most Desired Collectible to Sell:
-                                        </span>
-                                        <div>
-                                            {user.sellingCollectableInterested
-                                                ? `${
-                                                      user.sellingCollectableInterested.split(
-                                                          "---"
-                                                      )[1]
-                                                  } from ${
-                                                      user.sellingCollectableInterested.split(
-                                                          "---"
-                                                      )[0]
-                                                  }`
-                                                : "Not provided"}
-                                        </div>
+                                    <img src={saleIcon} />
+                                    <strong>
+                                        Most Desired Collectible to Sell:
+                                    </strong>
+                                    <div className="info-text">
+                                        {user.sellingCollectableInterested
+                                            ? `${
+                                                  user.sellingCollectableInterested.split(
+                                                      "---"
+                                                  )[1]
+                                              } from ${
+                                                  user.sellingCollectableInterested.split(
+                                                      "---"
+                                                  )[0]
+                                              }`
+                                            : "Not provided"}
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </>
                 ) : (
                     <div>Loading...</div>
