@@ -191,7 +191,7 @@ function ManageUserButton() {
                             >
                                 Delete this User
                             </button>
-                            {searchUserInfo.userRole.includes("MANAGER") && (
+                            {searchUserInfo.userRole && searchUserInfo.userRole.includes("MANAGER") && (
                                 <div className="manage-authority-wrapper">
                                     <form onSubmit={handleAuthorize}>
                                         <h3>Select permissions to authorise</h3>
