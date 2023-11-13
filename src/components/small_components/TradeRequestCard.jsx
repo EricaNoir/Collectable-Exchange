@@ -18,7 +18,7 @@ function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
     return (
         <>
             {myName === trade.requesterName ? (
-                <div className="trade-request-card">
+                <div className="trade-request-card" style={{backgroundColor: "#2c2c85"}}>
                     <div className="outgoing-request-card-1">
                         <h2 className="other-name">
                             My{" "}
@@ -52,7 +52,7 @@ function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
                     </div>
                 </div>
             ) : (
-                <div className="trade-request-card">
+                <div className="trade-request-card" style={{backgroundColor: "#2c855c"}}>
                     <div className="outgoing-request-card-1">
                         <h2 className="other-name">
                             {trade.requesterName}'s{" "}
@@ -73,7 +73,7 @@ function TradeRequestCard({ trade, myName, onConfirmClick, onDeclineClick }) {
                             {`${trade.collectableName} from ${trade.collectableSet}`}
                         </h3>
                         <p className="trade-request-card-price">
-                            {trade.price}
+                            {`Price:  AU$${trade.price}`}
                         </p>
                     </div>
                     <div className="outgoing-request-card-3">

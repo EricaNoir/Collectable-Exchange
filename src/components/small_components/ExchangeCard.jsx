@@ -12,8 +12,12 @@
 */
 
 function ExchangeCard({ exchange, onUserInfoClick, onSendRequestClick }) {
+    let colour = {
+        backgroundColor:
+            exchange.sellingOrBuying === "SELLING" ? "#2c2c85" : "#2c855c",
+    };
     return (
-        <div className="exchange-card">
+        <div className="exchange-card" style={colour}>
             <div className="exchange-card-1">
                 <div className="card-image-container">
                     <img

@@ -20,8 +20,12 @@
 */
 
 function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
+    let colour = {
+        backgroundColor:
+            exchange.sellingOrBuying === "SELLING" ? "#2c2c85" : "#2c855c",
+    };
     return (
-        <div className="my-collectable-card">
+        <div className="my-collectable-card" style={colour}>
             <div className="my-collectable-card-1">
                 <div className="my-collectable-card-image-container">
                     <img
@@ -40,23 +44,23 @@ function MyCollectableCard({ exchange, onEditClick, onToggleClick }) {
                 <p className="my-collectable-card-selling-or-buying">
                     {`Selling or Buying: ${exchange.sellingOrBuying}`}
                 </p>
+                <p>{exchange.visibility ? "Currently For Sale" : "Currently Off Market"}</p>
             </div>
 
             <div className="my-collectable-card-3">
-            <button
-                className="my-collectable-card-edit-btn"
-                onClick={() => onEditClick(exchange)}
-            >
-                Edit
-            </button>
-            <button 
-                className="my-collectable-card-toggle-btn"
-                onClick={() => onToggleClick(exchange)}
-            >
-                Toggle
-            </button>
+                <button
+                    className="my-collectable-card-edit-btn"
+                    onClick={() => onEditClick(exchange)}
+                >
+                    Edit
+                </button>
+                <button
+                    className="my-collectable-card-toggle-btn"
+                    onClick={() => onToggleClick(exchange)}
+                >
+                    {exchange.visibility ? "Unlist Item" : "List Item"}
+                </button>
             </div>
-
         </div>
     );
 }
