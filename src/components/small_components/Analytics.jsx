@@ -1,6 +1,5 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import starIcon from "../../static/star.png";
 
 function Analytics() {
     const [analytics, setAnalytics] = React.useState(null);
