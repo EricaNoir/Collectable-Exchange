@@ -22,7 +22,6 @@ function StaffLogInPage() {
         const url = "/api/login";
 
         const body = new URLSearchParams();
-        body.append("accountType", formData.accountType);
         body.append("username", formData.username);
         body.append("password", formData.password);
 
@@ -34,9 +33,22 @@ function StaffLogInPage() {
             },
         }).then((response) => {
             if (response.status === 200) {
-                console.log("success");
+                fetch("/api/myProfile")
+                    .then((response) => {
+                        if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                        }
+                        return response.json();
+                    })
+                    .then((data) => {
+                        if (!data.userRole.includes(formData.accountType)) {
+                            alert("Your account type is wrong!");
+                        } else {
+                            window.location.href = "/manager-admin-home";
+                        }
+                    });
             } else {
-                console.log(":(");
+                alert("Login fail.")
             }
         });
     };
@@ -62,10 +74,10 @@ function StaffLogInPage() {
                             onChange={handleInputChange}
                         >
                             <option value={formData.accountType}>
-                                Manager
+                                MANAGER
                             </option>
                             <option value={formData.accountType}>
-                                Administrator
+                                ADMIN
                             </option>
                         </select>
                     </div>
