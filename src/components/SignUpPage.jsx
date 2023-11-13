@@ -98,7 +98,6 @@ function SignUpPage() {
                     </div>
                     <input type="submit" value="Create" />
                 </form>
-                <div id="resultMessage"></div>
             </div>
         </>
     );
